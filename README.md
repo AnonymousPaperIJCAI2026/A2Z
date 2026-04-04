@@ -1,6 +1,6 @@
 <div align="left"> 
-<h1> 📌 SADC-Net </h1>
-<h3>SADC-Net: Cross-Domain Anomaly Detection with Semantic Anchors and Drift Control</h3>
+<h1> 📌 LAP: A2T </h1>
+<h3>Lifelong Anomaly Perception: Continual Auxiliary to Target Zero-Shot Anomaly Detection</h3>
 </div>
 
 
@@ -9,7 +9,7 @@
 <div align="justify">
 
 ## ⭐ Abstract 
-Cross-domain anomaly detection is critical in real-world inspection, where a model adapted on an auxiliary domain must generalize to unseen target domains while producing reliable pixel-level anomaly maps. However, adapting vision–language models in this setting often suffers from two issues: (i) alignment drift and score mis-calibration, which destabilize the semantic reference of normality and degrade cross-domain detection; and (ii) a localization gap under domain shift, where dense similarity-based maps become noisy and inconsistent. We propose ContinueCLIP, a parameter-efficient framework that preserves the pre-trained cross-modal geometry by freezing the CLIP backbone, while enabling robust transfer via lightweight trainable components. ContinueCLIP stabilizes zero-shot calibration with shared semantic anchors, absorbs domain variations with minimal perturbation, and enhances dense localization through multi-level token aggregation coupled with a consistency constraint. When a few normal target samples are available, an optional non-parametric memory further improves score stability.
+Zero-shot anomaly detection based on vision--language models is typically studied under static settings, whereas real deployments involve sequential domain shifts and continual updates. This mismatch leads to degraded transferability and unstable anomaly localization under streaming adaptation. To address this issue, we propose \textbf{A2T}, a continual \emph{auxiliary-to-target} zero-shot anomaly detection framework under the Lifelong Anomaly Perception (LAP) setting. The key idea is to decouple semantic transfer and structural stability during continual updates. Specifically, we introduce \emph{Stream-aware Continual Prompting} (SCP) to preserve transferable anomaly semantics via anchor-conditioned prompt learning, and \emph{Structure-aware Continual Stabilization} (SCS) to maintain boundary-aware local consistency through patch-consistent regularization and orthogonal-constrained parameter updates. These components are unified under a continual optimization objective that jointly balances semantic alignment, pixel-level supervision, and structural consistency. Extensive experiments on 12 industrial and medical benchmarks demonstrate that A2T consistently outperforms both static zero-shot methods and their streaming extensions, achieving state-of-the-art performance in image-level anomaly detection and pixel-level segmentation, while improving continual stability and boundary quality under domain streams.
 
 </div>
 
