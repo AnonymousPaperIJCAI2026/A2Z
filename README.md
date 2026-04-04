@@ -1,5 +1,5 @@
 <div align="left"> 
-<h1> 📌 LAP: A2T </h1>
+<h1> 📌 Lifelong Anomaly Perception: A2T </h1>
 <h3>Lifelong Anomaly Perception: Continual Auxiliary to Target Zero-Shot Anomaly Detection</h3>
 </div>
 
