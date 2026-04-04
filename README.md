@@ -122,8 +122,8 @@ For example, to test on the BrainMRI , simply run:
 
 
 ## 🖼️ Visualization
-<center><img src="images/3.png "width="70%"></center>
-<center><img src="images/4.png "width="70%"></center>
+<center><img src="images/fig3.png "width="70%"></center>
+<center><img src="images/fig4.png "width="70%"></center>
 <center><img src="images/5.png "width="70%"></center>
 
 ## 🙏 Acknowledgement
