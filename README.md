@@ -119,7 +119,7 @@ For example, to test on the BrainMRI , simply run:
 `python train_zero.py`
 
 
-## 📝 ACM Rebuttal Status
+## 📝 ACMMM2026 Rebuttal Status
 
 This repository is currently being updated for the ACM rebuttal period.
 We are actively improving the reproducibility, protocol clarity, and supplementary experimental results of A2T.
