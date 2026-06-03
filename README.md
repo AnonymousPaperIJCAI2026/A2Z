@@ -119,6 +119,107 @@ For example, to test on the BrainMRI , simply run:
 `python train_zero.py`
 
 
+## 📝 ACM Rebuttal Status
+
+This repository is currently being updated for the ACM rebuttal period.
+We are actively improving the reproducibility, protocol clarity, and supplementary experimental results of A2T.
+
+### Current rebuttal-stage updates
+
+* **Protocol clarification.**
+  We clarify that A2T follows a continual **auxiliary-to-target zero-shot** protocol. The model is updated only on the auxiliary-domain stream, while target domains are strictly used for evaluation.
+
+* **No target-domain adaptation.**
+  No target-domain image, label, mask, validation set, or test sample is used for training, hyper-parameter selection, or model updating.
+
+* **Auxiliary-domain stream.**
+  The continual stream consists of sequentially arriving auxiliary domains. At step `t`, the model only accesses the current auxiliary dataset `A_t`.
+
+* **Zero-shot definition.**
+  The term **zero-shot** refers to zero-shot generalization to unseen target domains. It does not mean that the method is training-free, since auxiliary-domain supervision is used.
+
+* **Additional evaluation metrics.**
+  Following reviewer suggestions, we additionally report pixel-level AP and max-F1, besides image-level AUROC/AP and pixel-level AUROC/PRO.
+
+* **Stage-wise continual evaluation.**
+  We provide stage-wise results after each auxiliary-domain update to show how target-domain transferability changes during continual learning.
+
+* **Baseline protocol clarification.**
+  Training-free baselines such as WinCLIP are evaluated without adaptation. Adaptation-based baselines are evaluated under their corresponding single-adaptation or continual-extension settings.
+
+### Auxiliary-to-target protocol
+
+The auxiliary and target domains are disjoint. Target domains are used only for evaluation.
+
+| Super-domain | Auxiliary domain | Target domain |
+| ------------ | ---------------- | ------------- |
+| Industrial   | MVTec            | VisA          |
+| Industrial   | VisA             | MVTec         |
+| Industrial   | MPDD             | BTAD          |
+| Industrial   | BTAD             | MPDD          |
+| Industrial   | DTD              | DAGM          |
+| Industrial   | DAGM             | DTD           |
+| Medical      | ClinicDB         | ColonDB       |
+| Medical      | ColonDB          | ClinicDB      |
+| Medical      | ISIC             | Kvasir        |
+| Medical      | Kvasir           | ISIC          |
+| Medical      | BrainMRI         | Br35H         |
+| Medical      | Br35H            | BrainMRI      |
+
+### Example continual stream
+
+One representative auxiliary-domain stream is:
+
+```bash
+MVTec -> MPDD -> DTD -> ClinicDB -> ISIC -> BrainMRI
+```
+
+The corresponding target probes are:
+
+```bash
+VisA, BTAD, DAGM, ColonDB, Kvasir, Br35H
+```
+
+The model is evaluated on these target probes after each auxiliary-domain update, but the target data are never used for optimization.
+
+### Additional pixel-level metrics
+
+| Method  | Domain          | pAUROC |   PRO |   pAP |   pF1 |
+| ------- | --------------- | -----: | ----: | ----: | ----: |
+| AF-CLIP | Industrial Avg. |  89.22 | 74.41 | 28.79 | 31.72 |
+| AF-CLIP | Medical Avg.    |  93.34 | 77.35 | 75.30 | 69.86 |
+| AF-CLIP | Overall Avg.    |  90.87 | 75.59 | 47.40 | 46.98 |
+| A2T     | Industrial Avg. |  94.40 | 86.09 | 38.88 | 42.01 |
+| A2T     | Medical Avg.    |  90.57 | 75.81 | 70.20 | 66.25 |
+| A2T     | Overall Avg.    |  92.87 | 81.98 | 51.41 | 51.70 |
+
+### Stage-wise retention
+
+T1 denotes the performance immediately after learning the first auxiliary domain.
+T6 denotes the performance after completing the full six-domain auxiliary stream.
+
+| Method  | Earliest target | Image AUROC T1 | Image AUROC T6 |     Δ | Pixel AP T1 | Pixel AP T6 |     Δ | Pixel max-F1 T1 | Pixel max-F1 T6 |
+| ------- | --------------- | -------------: | -------------: | ----: | ----------: | ----------: | ----: | --------------: | --------------: |
+| AF-CLIP | VisA            |          88.48 |          87.42 | -1.06 |       26.95 |       19.28 | -7.67 |           33.61 |           23.75 |
+| AF-CLIP | MVTec           |          92.35 |          91.71 | -0.64 |       47.15 |       37.30 | -9.85 |           47.81 |           39.58 |
+| A2T     | VisA            |          87.90 |          87.64 | -0.25 |       26.96 |       25.66 | -1.31 |           33.60 |           32.04 |
+| A2T     | MVTec           |          93.49 |          92.83 | -0.66 |       46.99 |       41.02 | -5.98 |           47.99 |           43.29 |
+
+### Code release status
+
+The codebase is being organized for rebuttal-stage reproducibility.
+We are updating the following components:
+
+* training scripts for continual auxiliary-domain learning;
+* evaluation scripts for unseen target-domain probing;
+* configuration files for auxiliary-target pair construction;
+* logs and scripts for additional metrics, including pixel-level AP and max-F1;
+* README instructions for dataset preparation and command-line usage.
+
+A cleaner version with complete running commands and checkpoints will be updated during the rebuttal period.
+
+
+
 
 
 ## 🖼️ Visualization
