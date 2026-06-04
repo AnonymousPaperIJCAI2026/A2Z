@@ -258,11 +258,12 @@ A2T achieves the best overall results across all image-level and pixel-level met
 
 We further summarize the first-to-final retention over all 12 held-out target probes. “First” denotes the performance when a target domain is first evaluated after its paired auxiliary source is learned, and “Final” denotes the performance after completing the full auxiliary-domain stream.
 
-| Method  | iAUROC First → Final |   ΔiAUROC | pAP First → Final |      ΔpAP | pF1 First → Final |      ΔpF1 | PRO First → Final |      ΔPRO |
-| ------- | -------------------: | --------: | ----------------: | --------: | ----------------: | --------: | ----------------: | --------: |
-| MVFA-AD |        91.99 → 89.66 |     -2.33 |     56.21 → 50.85 |     -5.36 |     55.77 → 51.62 |     -4.16 |     84.41 → 79.46 |     -4.94 |
-| AF-CLIP |        92.90 → 92.97 |     +0.07 |     58.76 → 47.40 |    -11.37 |     56.90 → 46.98 |     -9.92 |     84.31 → 75.59 |     -8.72 |
-| **A2T** |    **93.66 → 93.77** | **+0.10** | **56.17 → 51.41** | **-4.77** | **55.06 → 51.70** | **-3.36** | **83.69 → 81.98** | **-1.72** |
+| Method      | iAUROC First → Final |   ΔiAUROC | pAP First → Final |      ΔpAP | pF1 First → Final |      ΔpF1 | PRO First → Final |      ΔPRO |
+| ----------- | -------------------: | --------: | ----------------: | --------: | ----------------: | --------: | ----------------: | --------: |
+| AnomalyCLIP |        88.06 → 71.80 |    -16.26 |     48.12 → 16.42 |    -31.70 |     48.39 → 20.57 |    -27.82 |     75.46 → 35.79 |    -39.67 |
+| MVFA-AD     |        91.99 → 89.66 |     -2.33 |     56.21 → 50.85 |     -5.36 |     55.77 → 51.62 |     -4.16 |     84.41 → 79.46 |     -4.94 |
+| AF-CLIP     |        92.90 → 92.97 |     +0.07 |     58.76 → 47.40 |    -11.37 |     56.90 → 46.98 |     -9.92 |     84.31 → 75.59 |     -8.72 |
+| **A2T**     |    **93.66 → 93.77** | **+0.10** | **56.17 → 51.41** | **-4.77** | **55.06 → 51.70** | **-3.36** | **83.69 → 81.98** | **-1.72** |
 
 Compared with AF-CLIP and MVFA-AD, A2T shows smaller long-term degradation on imbalance-sensitive pixel-level AP, max-F1, and PRO, indicating better preservation of dense anomaly localization under continual auxiliary-domain updates.
 
