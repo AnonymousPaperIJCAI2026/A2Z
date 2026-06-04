@@ -268,11 +268,21 @@ We further summarize the first-to-final retention over all 12 held-out target pr
 Compared with AF-CLIP and MVFA-AD, A2T shows smaller long-term degradation on imbalance-sensitive pixel-level AP, max-F1, and PRO, indicating better preservation of dense anomaly localization under continual auxiliary-domain updates.
 
 
+## Efficiency and Complexity Analysis
+
+To further evaluate the deployment cost of A2T, we report model size, trainable parameters, inference speed, latency, and peak GPU memory. All methods are evaluated under the same inference protocol and input resolution. For A2T, the CLIP backbone is kept frozen, and only lightweight prompt/adaptation modules are optimized during auxiliary-domain continual learning.
+
 | Method | Params ↓ | Trainable ↓ | Speed ↑ | Latency ↓ | Peak Mem ↓ |
 |---|---:|---:|---:|---:|---:|
-| A2T full | 431.11M | 3.17M / 0.735% | 8.29 img/s | 120.70 ms/img | 4.33 GB |
+| **A2T full** | **431.11M** | **3.17M / 0.735%** | **8.29 img/s** | **120.70 ms/img** | **4.33 GB** |
 | AnomalyCLIP | 433.50M | 5.56M / 1.281% | 6.65 img/s | 150.29 ms/img | 4.87 GB |
 | AdaptCLIP zero-shot | 428.55M | 0.61M / 0.142% | 6.61 img/s | 151.34 ms/img | 4.86 GB |
+
+**Analysis.** A2T introduces only **3.17M** trainable parameters, accounting for **0.735%** of the full model parameters. Compared with AnomalyCLIP, A2T reduces the number of trainable parameters from **5.56M** to **3.17M**, while improving inference speed from **6.65 img/s** to **8.29 img/s** and reducing latency from **150.29 ms/img** to **120.70 ms/img**. A2T also requires lower peak GPU memory, using **4.33 GB** compared with **4.87 GB** for AnomalyCLIP and **4.86 GB** for AdaptCLIP.
+
+These results show that the proposed continual auxiliary-to-target adaptation does not rely on heavy full-model fine-tuning. Instead, A2T keeps the large pretrained vision-language backbone frozen and performs efficient adaptation through lightweight trainable modules, achieving favorable efficiency while preserving strong zero-shot transferability and continual stability.
+
+**Measurement details.** Speed and latency are measured during inference. Peak memory denotes the maximum GPU memory usage under the same evaluation setting. Data loading time is excluded from the reported inference speed and latency.
 
 ### Code release status
 
