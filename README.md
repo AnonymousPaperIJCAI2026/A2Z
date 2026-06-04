@@ -177,7 +177,7 @@ MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
 The corresponding target probes are:
 
 ```bash
-VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
+VisA     ColonDB     BTAD    Kvasir    DAGM    Br35H
 ```
 
 The model is evaluated on these target probes after each auxiliary-domain update, but the target data are never used for optimization.
