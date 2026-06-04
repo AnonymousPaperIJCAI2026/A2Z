@@ -268,6 +268,12 @@ We further summarize the first-to-final retention over all 12 held-out target pr
 Compared with AF-CLIP and MVFA-AD, A2T shows smaller long-term degradation on imbalance-sensitive pixel-level AP, max-F1, and PRO, indicating better preservation of dense anomaly localization under continual auxiliary-domain updates.
 
 
+| Method | Params ↓ | Trainable ↓ | Speed ↑ | Latency ↓ | Peak Mem ↓ |
+|---|---:|---:|---:|---:|---:|
+| A2T full | 431.11M | 3.17M / 0.735% | 8.29 img/s | 120.70 ms/img | 4.33 GB |
+| AnomalyCLIP | 433.50M | 5.56M / 1.281% | 6.65 img/s | 150.29 ms/img | 4.87 GB |
+| AdaptCLIP zero-shot | 428.55M | 0.61M / 0.142% | 6.61 img/s | 151.34 ms/img | 4.86 GB |
+
 ### Code release status
 
 The codebase is being organized for rebuttal-stage reproducibility.
