@@ -171,13 +171,13 @@ The auxiliary and target domains are disjoint. Target domains are used only for 
 One representative auxiliary-domain stream is:
 
 ```bash
-MVTec -> MPDD -> DTD -> ClinicDB -> ISIC -> BrainMRI
+MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
 ```
 
 The corresponding target probes are:
 
 ```bash
-VisA, BTAD, DAGM, ColonDB, Kvasir, Br35H
+VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
 ```
 
 The model is evaluated on these target probes after each auxiliary-domain update, but the target data are never used for optimization.
