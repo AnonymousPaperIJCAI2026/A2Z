@@ -234,13 +234,13 @@ Following reviewer suggestions, we additionally report pixel-level AP and max-F1
 | ------- | --------------- | -----: | ----: | ----: | -----: | ----: | ----: | ----: |
 | MVFA-AD | Industrial Avg. |  86.43 | 89.91 | 88.44 |  92.26 | 78.60 | 36.74 | 39.80 |
 | MVFA-AD | Medical Avg.    |  99.35 | 99.33 | 97.96 |  92.91 | 80.76 | 72.01 | 69.34 |
-| MVFA-AD | Overall Avg.    |  89.66 | 92.27 | 90.82 |  92.52 | 79.46 | 50.85 | 51.62 |
+| MVFA-AD | **Overall Avg.**    |  89.66 | 92.27 | 90.82 |  92.52 | 79.46 | 50.85 | 51.62 |
 | AF-CLIP | Industrial Avg. |  90.96 | 91.85 | 88.86 |  89.22 | 74.41 | 28.79 | 31.72 |
 | AF-CLIP | Medical Avg.    |  98.98 | 98.94 | 97.66 |  93.34 | 77.35 | 75.30 | 69.86 |
-| AF-CLIP | Overall Avg.    |  92.97 | 93.62 | 91.06 |  90.87 | 75.59 | 47.40 | 46.98 |
+| AF-CLIP | **Overall Avg.**    |  92.97 | 93.62 | 91.06 |  90.87 | 75.59 | 47.40 | 46.98 |
 | A2T     | Industrial Avg. |  91.84 | 93.32 | 90.08 |  94.40 | 86.09 | 38.88 | 42.01 |
 | A2T     | Medical Avg.    |  99.55 | 99.59 | 97.99 |  90.57 | 75.81 | 70.20 | 66.25 |
-| A2T     | Overall Avg.    |  🟩 **93.77** | 🟩 **94.88** | 🟩 **92.06** | 🟩 **92.87** | 🟩 **81.98** | 🟩 **51.41** | 🟩 **51.70** |
+| A2T     | **Overall Avg.**    |  🟩 **93.77** | 🟩 **94.88** | 🟩 **92.06** | 🟩 **92.87** | 🟩 **81.98** | 🟩 **51.41** | 🟩 **51.70** |
 
 
 A2T achieves the best overall image-level AUROC/AP/max-F1 and the best overall pixel-level AUROC/PRO/AP/max-F1. Although MVFA-AD and AF-CLIP remain competitive on some medical pixel-level subsets, A2T provides the strongest overall balance between image-level recognition, dense localization, and continual stability.
