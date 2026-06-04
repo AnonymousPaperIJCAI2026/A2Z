@@ -243,7 +243,7 @@ Following reviewer suggestions, we additionally report pixel-level AP and max-F1
 | A2T     | **Overall Avg.**    |  🟩 **93.77** | 🟩 **94.88** | 🟩 **92.06** | 🟩 **92.87** | 🟩 **81.98** | 🟩 **51.41** | 🟩 **51.70** |
 
 
-A2T achieves the best overall image-level AUROC/AP/max-F1 and the best overall pixel-level AUROC/PRO/AP/max-F1. Although MVFA-AD and AF-CLIP remain competitive on some medical pixel-level subsets, A2T provides the strongest overall balance between image-level recognition, dense localization, and continual stability.
+A2T achieves the best overall results across all image-level and pixel-level metrics, indicating a better balance between image-level recognition and dense anomaly localization.
 
 ### Long-term retention summary
 
