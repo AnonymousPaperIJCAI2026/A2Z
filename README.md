@@ -196,15 +196,6 @@ Auxiliary stream:
 MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
 ```
 
-| Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
-| ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
-| 1    | MVTec        | VisA                |      87.90 |   26.96 |   33.60 |   88.11 |                — |             — |             — |             — |
-| 2    | ClinicDB     | ColonDB             |          — |   63.82 |   60.43 |   82.61 |            +0.22 |         -1.63 |         -1.72 |         -1.59 |
-| 3    | MPDD         | BTAD                |      94.67 |   38.53 |   44.36 |   74.82 |            +0.24 |         -0.86 |         -1.08 |         +0.46 |
-| 4    | ISIC         | Kvasir              |          — |   82.09 |   74.66 |   77.60 |            -0.42 |         -3.17 |         -1.67 |         -2.04 |
-| 5    | DTD          | DAGM                |      98.11 |   53.95 |   54.76 |   93.61 |            +0.34 |         -2.50 |         -1.70 |         -0.71 |
-| 6    | BrainMRI     | Br35H               |      99.55 |       — |       — |       — |            -0.07 |         -3.39 |         -2.27 |         -1.58 |
-
 #### Table R1b. A2T stage-wise results, Fold-2
 
 Auxiliary stream:
@@ -213,18 +204,33 @@ Auxiliary stream:
 VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
 ```
 
+`N/A` indicates that the corresponding metric is not applicable, e.g., image-level metrics for medical segmentation datasets with only anomalous test images, or old-target change at the first step.
+
+##### Fold-1: Stage-wise results
+
 | Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
 | ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
-| 1    | VisA         | MVTec               |      93.49 |   46.99 |   47.99 |   85.85 |                — |             — |             — |             — |
-| 2    | ColonDB      | ClinicDB            |          — |   79.38 |   71.83 |   88.52 |            -0.79 |         -2.94 |         -1.93 |         -2.76 |
-| 3    | BTAD         | MPDD                |      77.13 |   24.62 |   26.61 |   83.88 |            -0.45 |         -1.71 |         -1.52 |         -0.99 |
-| 4    | Kvasir       | ISIC                |          — |   83.80 |   77.37 |   82.91 |            -0.19 |         +0.63 |         +0.95 |         -0.25 |
-| 5    | DAGM         | DTD                 |      98.92 |   61.59 |   58.99 |   79.02 |            -0.28 |         -3.17 |         -1.72 |         -8.44 |
-| 6    | Br35H        | BrainMRI            |      99.55 |       — |       — |       — |            +0.34 |         -6.14 |         -4.45 |         -1.86 |
+| 1 | MVTec | VisA | 87.90 | 26.96 | 33.60 | 88.11 | N/A | N/A | N/A | N/A |
+| 2 | ClinicDB | ColonDB | N/A | 63.82 | 60.43 | 82.61 | +0.22 | -1.63 | -1.72 | -1.59 |
+| 3 | MPDD | BTAD | 94.67 | 38.53 | 44.36 | 74.82 | +0.24 | -0.86 | -1.08 | +0.46 |
+| 4 | ISIC | Kvasir | N/A | 82.09 | 74.66 | 77.60 | -0.42 | -3.17 | -1.67 | -2.04 |
+| 5 | DTD | DAGM | 98.11 | 53.95 | 54.76 | 93.61 | +0.34 | -2.50 | -1.70 | -0.71 |
+| 6 | BrainMRI | Br35H | 99.55 | N/A | N/A | N/A | -0.07 | -3.39 | -2.27 | -1.58 |
 
-These results show that A2T can transfer to newly related unseen targets while maintaining previously evaluated target performance during continual auxiliary-domain learning.
+##### Fold-2: Stage-wise results
 
-### Additional pixel-level metrics
+| Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
+| ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
+| 1 | VisA | MVTec | 93.49 | 46.99 | 47.99 | 85.85 | N/A | N/A | N/A | N/A |
+| 2 | ColonDB | ClinicDB | N/A | 79.38 | 71.83 | 88.52 | -0.79 | -2.94 | -1.93 | -2.76 |
+| 3 | BTAD | MPDD | 77.13 | 24.62 | 26.61 | 83.88 | -0.45 | -1.71 | -1.52 | -0.99 |
+| 4 | Kvasir | ISIC | N/A | 83.80 | 77.37 | 82.91 | -0.19 | +0.63 | +0.95 | -0.25 |
+| 5 | DAGM | DTD | 98.92 | 61.59 | 58.99 | 79.02 | -0.28 | -3.17 | -1.72 | -8.44 |
+| 6 | Br35H | BrainMRI | 99.55 | N/A | N/A | N/A | +0.34 | -6.14 | -4.45 | -1.86 |
+
+These results directly instantiate the reviewer’s I/M/J/N example: after learning each auxiliary source, we evaluate its related held-out target; after adding each new source, we report both the new target performance and the average change on previously evaluated targets. This makes the transfer-forgetting dynamics explicit without using any target-domain data for training.
+
+### Additional image- and pixel-level metrics
 
 Following reviewer suggestions, we additionally report pixel-level AP and max-F1, besides image-level AUROC/AP and pixel-level AUROC/PRO. We also include image-level max-F1 for a more complete classification evaluation.
 
