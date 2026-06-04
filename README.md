@@ -193,17 +193,73 @@ The model is evaluated on these target probes after each auxiliary-domain update
 | A2T     | Medical Avg.    |  90.57 | 75.81 | 70.20 | 66.25 |
 | A2T     | Overall Avg.    |  92.87 | 81.98 | 51.41 | 51.70 |
 
-### Stage-wise retention
+### Stage-wise zero-shot probe matrix
 
-T1 denotes the performance immediately after learning the first auxiliary domain.
-T6 denotes the performance after completing the full six-domain auxiliary stream.
+To directly answer the reviewer’s question about “the performance after using source dataset A and the change after adding source dataset B,” we report stage-wise zero-shot evaluation after each auxiliary-domain update.
 
-| Method  | Earliest target | Image AUROC T1 | Image AUROC T6 |     Δ | Pixel AP T1 | Pixel AP T6 |     Δ | Pixel max-F1 T1 | Pixel max-F1 T6 |
-| ------- | --------------- | -------------: | -------------: | ----: | ----------: | ----------: | ----: | --------------: | --------------: |
-| AF-CLIP | VisA            |          88.48 |          87.42 | -1.06 |       26.95 |       19.28 | -7.67 |           33.61 |           23.75 |
-| AF-CLIP | MVTec           |          92.35 |          91.71 | -0.64 |       47.15 |       37.30 | -9.85 |           47.81 |           39.58 |
-| A2T     | VisA            |          87.90 |          87.64 | -0.25 |       26.96 |       25.66 | -1.31 |           33.60 |           32.04 |
-| A2T     | MVTec           |          93.49 |          92.83 | -0.66 |       46.99 |       41.02 | -5.98 |           47.99 |           43.29 |
+At each step, the model is trained only on the newly arriving auxiliary source. All listed target domains are held out and used only for evaluation. The columns `Avg. old-target Δ` report the average performance change on previously evaluated target domains, compared with their performance when they first appeared.
+
+#### Table R1a. A2T stage-wise results, Fold-1
+
+Auxiliary stream:
+
+```bash
+MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
+```
+
+| Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
+| ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
+| 1    | MVTec        | VisA                |      87.90 |   26.96 |   33.60 |   88.11 |                — |             — |             — |             — |
+| 2    | ClinicDB     | ColonDB             |          — |   63.82 |   60.43 |   82.61 |            +0.22 |         -1.63 |         -1.72 |         -1.59 |
+| 3    | MPDD         | BTAD                |      94.67 |   38.53 |   44.36 |   74.82 |            +0.24 |         -0.86 |         -1.08 |         +0.46 |
+| 4    | ISIC         | Kvasir              |          — |   82.09 |   74.66 |   77.60 |            -0.42 |         -3.17 |         -1.67 |         -2.04 |
+| 5    | DTD          | DAGM                |      98.11 |   53.95 |   54.76 |   93.61 |            +0.34 |         -2.50 |         -1.70 |         -0.71 |
+| 6    | BrainMRI     | Br35H               |      99.55 |       — |       — |       — |            -0.07 |         -3.39 |         -2.27 |         -1.58 |
+
+#### Table R1b. A2T stage-wise results, Fold-2
+
+Auxiliary stream:
+
+```bash
+VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
+```
+
+| Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
+| ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
+| 1    | VisA         | MVTec               |      93.49 |   46.99 |   47.99 |   85.85 |                — |             — |             — |             — |
+| 2    | ColonDB      | ClinicDB            |          — |   79.38 |   71.83 |   88.52 |            -0.79 |         -2.94 |         -1.93 |         -2.76 |
+| 3    | BTAD         | MPDD                |      77.13 |   24.62 |   26.61 |   83.88 |            -0.45 |         -1.71 |         -1.52 |         -0.99 |
+| 4    | Kvasir       | ISIC                |          — |   83.80 |   77.37 |   82.91 |            -0.19 |         +0.63 |         +0.95 |         -0.25 |
+| 5    | DAGM         | DTD                 |      98.92 |   61.59 |   58.99 |   79.02 |            -0.28 |         -3.17 |         -1.72 |         -8.44 |
+| 6    | Br35H        | BrainMRI            |      99.55 |       — |       — |       — |            +0.34 |         -6.14 |         -4.45 |         -1.86 |
+
+These results show that A2T can transfer to newly related unseen targets while maintaining previously evaluated target performance during continual auxiliary-domain learning.
+
+### Additional pixel-level metrics
+
+Following reviewer suggestions, we additionally report pixel-level AP and max-F1, besides image-level AUROC/AP and pixel-level AUROC/PRO.
+
+| Method  | Domain          | pAUROC |   PRO |   pAP |   pF1 |
+| ------- | --------------- | -----: | ----: | ----: | ----: |
+| AF-CLIP | Industrial Avg. |  89.22 | 74.41 | 28.79 | 31.72 |
+| AF-CLIP | Medical Avg.    |  93.34 | 77.35 | 75.30 | 69.86 |
+| AF-CLIP | Overall Avg.    |  90.87 | 75.59 | 47.40 | 46.98 |
+| A2T     | Industrial Avg. |  94.40 | 86.09 | 38.88 | 42.01 |
+| A2T     | Medical Avg.    |  90.57 | 75.81 | 70.20 | 66.25 |
+| A2T     | Overall Avg.    |  92.87 | 81.98 | 51.41 | 51.70 |
+
+### Long-term retention summary
+
+We further summarize the first-to-final retention over all 12 held-out target probes. “First” denotes the performance when a target domain is first evaluated after its paired auxiliary source is learned, and “Final” denotes the performance after completing the full auxiliary-domain stream.
+
+| Method  | iAUROC First → Final |   ΔiAUROC | pAP First → Final |      ΔpAP | pF1 First → Final |      ΔpF1 | PRO First → Final |      ΔPRO |
+| ------- | -------------------: | --------: | ----------------: | --------: | ----------------: | --------: | ----------------: | --------: |
+| MVFA-AD |        91.99 → 89.66 |     -2.33 |     56.21 → 50.85 |     -5.36 |     55.77 → 51.62 |     -4.16 |     84.41 → 79.46 |     -4.94 |
+| AF-CLIP |        92.90 → 92.97 |     +0.07 |     58.76 → 47.40 |    -11.37 |     56.90 → 46.98 |     -9.92 |     84.31 → 75.59 |     -8.72 |
+| **A2T** |    **93.66 → 93.77** | **+0.10** | **56.17 → 51.41** | **-4.77** | **55.06 → 51.70** | **-3.36** | **83.69 → 81.98** | **-1.72** |
+
+Compared with AF-CLIP and MVFA-AD, A2T shows smaller long-term degradation on imbalance-sensitive pixel-level AP, max-F1, and PRO, indicating better preservation of dense anomaly localization under continual auxiliary-domain updates.
+
 
 ### Code release status
 
