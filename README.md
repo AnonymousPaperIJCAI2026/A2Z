@@ -134,10 +134,14 @@ These results directly instantiate the reviewer’s I/M/J/N example: after learn
 
 
 
-#### Stage-wise old-target trajectory: VisA after each source update
+#### Two-fold old-target trajectory after each source update
 
-To explicitly answer how a previously evaluated target changes after adding a new source dataset, we report the stage-wise trajectory of VisA in Fold-1.  
-At Step 1, the model is updated with MVTec and evaluated on VisA. From Step 2 onward, VisA becomes an old target, and `Δ vs. prev. step` measures the change after adding the current new source compared with the immediately preceding source update.
+To explicitly answer how a previously evaluated target changes after adding new source datasets, we report old-target trajectories in both folds.  
+For each row, `Δ vs. prev. step` is computed as the score after adding the current source minus the score after the immediately preceding source update.
+
+##### Fold-1 old-target example: VisA
+
+In Fold-1, MVTec is first used as the source and VisA is evaluated as the paired target. From Step 2 onward, VisA becomes an old target, and the table reports how its performance changes after each newly added source dataset.
 
 | Step | New source added | Source datasets seen so far | Target probe | iAUROC/iAP | Δ iAUROC/iAP vs. prev. step | pAUROC/pAP/pF1/PRO | Δ pAUROC/pAP/pF1/PRO vs. prev. step |
 |---:|---|---|---|---:|---:|---:|---:|
@@ -147,6 +151,19 @@ At Step 1, the model is updated with MVTec and evaluated on VisA. From Step 2 on
 | 4 | ISIC | MVTec, ClinicDB, MPDD, ISIC | VisA | 88.25/89.94 | +0.12/+0.10 | 96.01/24.72/31.05/87.72 | -0.02/-0.57/-0.72/+0.03 |
 | 5 | DTD | MVTec, ClinicDB, MPDD, ISIC, DTD | VisA | 88.44/90.03 | +0.18/+0.09 | 95.94/24.68/30.81/87.40 | -0.07/-0.04/-0.24/-0.32 |
 | 6 | BrainMRI | MVTec, ClinicDB, MPDD, ISIC, DTD, BrainMRI | VisA | 87.64/89.03 | -0.80/-1.00 | 96.04/25.66/32.04/88.62 | +0.10/+0.97/+1.23/+1.22 |
+
+##### Fold-2 old-target example: MVTec
+
+In Fold-2, the source-target role is swapped: VisA is first used as the source and MVTec is evaluated as the paired target. From Step 2 onward, MVTec becomes an old target, and the table reports its change after adding each new source dataset.
+
+| Step | New source added | Source datasets seen so far | Target probe | iAUROC/iAP | Δ iAUROC/iAP vs. prev. step | pAUROC/pAP/pF1/PRO | Δ pAUROC/pAP/pF1/PRO vs. prev. step |
+|---:|---|---|---|---:|---:|---:|---:|
+| 1 | VisA | VisA | MVTec | 93.49/97.23 | N/A | 92.44/46.99/47.99/85.85 | N/A |
+| 2 | ColonDB | VisA, ColonDB | MVTec | 92.70/96.67 | -0.79/-0.56 | 91.31/44.05/46.06/83.10 | -1.12/-2.94/-1.93/-2.76 |
+| 3 | BTAD | VisA, ColonDB, BTAD | MVTec | 93.03/96.84 | +0.34/+0.17 | 91.66/45.27/46.63/83.53 | +0.35/+1.22/+0.57/+0.43 |
+| 4 | Kvasir | VisA, ColonDB, BTAD, Kvasir | MVTec | 92.07/96.44 | -0.96/-0.39 | 90.53/41.13/43.46/82.84 | -1.13/-4.14/-3.17/-0.69 |
+| 5 | DAGM | VisA, ColonDB, BTAD, Kvasir, DAGM | MVTec | 92.65/96.58 | +0.57/+0.14 | 90.88/40.30/42.66/75.55 | +0.35/-0.83/-0.80/-7.28 |
+| 6 | Br35H | VisA, ColonDB, BTAD, Kvasir, DAGM, Br35H | MVTec | 92.83/96.56 | +0.18/-0.03 | 91.46/41.02/43.29/83.76 | +0.58/+0.72/+0.63/+8.21 |
 
 
 
