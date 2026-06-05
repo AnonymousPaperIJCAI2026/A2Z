@@ -238,8 +238,7 @@ These results show that the proposed continual auxiliary-to-target adaptation do
 
 ### Code release status
 
-The codebase is being organized for rebuttal-stage reproducibility.
-We are updating the following components:
+The codebase is being organized for reproducibility. We are preparing the following components:
 
 * training scripts for continual auxiliary-domain learning;
 * evaluation scripts for unseen target-domain probing;
@@ -247,7 +246,7 @@ We are updating the following components:
 * logs and scripts for additional metrics, including pixel-level AP and max-F1;
 * README instructions for dataset preparation and command-line usage.
 
-A cleaner version with complete running commands and checkpoints will be updated during the rebuttal period.
+To ensure a clean and reproducible release, the complete codebase, running commands, and checkpoints will be publicly released upon acceptance.
 
 ## 🚀 Get Started
 
