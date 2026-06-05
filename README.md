@@ -17,6 +17,20 @@ Zero-shot anomaly detection based on vision--language models is typically studie
 
 <div align="center"> <img src="images/fig2.png " width="100%"> </div>
 
+## Reviewer Navigation Map
+
+| GitHub ID | Reviewer concern | Section / Table | Main takeaway |
+|---|---|---|---|
+| GH-1 | LAP protocol and target access | Table GH-1 | LAP is auxiliary-supervised but target-zero-shot. |
+| GH-2 | Stage-wise performance after each source | Tables GH-2a / GH-2b | Shows zero-shot probes after every auxiliary update. |
+| GH-3 | Old-target forgetting trajectory | Tables GH-3a / GH-3b | Shows old-target changes after adding new sources. |
+| GH-4 | Additional AP/F1 metrics | Table GH-4 | Reports iF1, pAP, and pF1. |
+| GH-5 | First-to-final retention | Table GH-5 | Compares long-term drops across methods. |
+| GH-6 | LAP vs. CAD | Table GH-6 | Clarifies data-access and evaluation differences. |
+| GH-7 | Stream-order sensitivity | Tables GH-7a / GH-7b | Compares Family-grouped, Alternating, and Distance-based orders. |
+| GH-8 | SCS basis construction and storage | Table GH-8 | Reports SVD/QR basis update and replay-free storage. |
+| GH-9 | Efficiency and complexity | Table GH-9 | Reports parameters, speed, latency, and memory. |
+| GH-10 | Continual-learning baselines | Tables GH-10a / GH-10b | Reports EWC and LwF/KD under the same LAP stream. |
 
 ## 📝 ACMMM2026 Rebuttal Status 👈
 We thank the reviewers for their constructive comments. Following their suggestions, we have updated this repository to clarify the continual auxiliary-to-target zero-shot protocol and provide additional analyses for easier verification. Specifically, we clarify the data-access constraints of LAP, add stage-wise source-update evaluations and two-fold old-target trajectories, report additional image-/pixel-level F1 and AP metrics, and include analyses on stream order, long-term retention, baseline fairness, implementation details, and efficiency. These updates aim to make the A2T setting, evaluation protocol, and deployment cost clearer.
