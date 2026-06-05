@@ -57,20 +57,6 @@ We thank the reviewers for their constructive comments. Following their suggesti
   We report model size, trainable parameters, inference speed, latency, and peak memory under the same inference protocol.
 
 
-## Relation to Continual Anomaly Detection
-
-We thank the reviewer for pointing out the connection between Lifelong Anomaly Perception (LAP) and Continual Anomaly Detection (CAD). LAP is related to CAD in that both study anomaly detection under sequential domain/task changes. However, LAP targets a different data-access protocol and evaluation goal. Most CAD methods focus on preserving or adapting anomaly detection performance over observed task/domain streams, whereas LAP couples continual auxiliary-domain learning with target-zero-shot transfer to unseen domains.
-
-The key difference is that LAP does not continually adapt on target domains. Instead, labeled auxiliary/source domains arrive sequentially, and target domains are strictly held out for zero-shot evaluation. Thus, LAP evaluates not only anti-forgetting over the auxiliary stream, but also whether the learned anomaly semantics and local structures remain transferable to unseen target domains.
-
-| Setting | Training data | Target access | Goal | Evaluation |
-|---|---|---|---|---|
-| Static zero-shot AD | One fixed auxiliary source or pretrained model | No target training data | Transfer once to unseen targets | Final zero-shot performance |
-| Continual Anomaly Detection (CAD) | Sequential observed task/domain stream | Usually adapts to the observed domains/tasks | Preserve or adapt AD performance over seen domain/task streams | Performance/forgetting on observed or previously seen tasks |
-| LAP | Sequential auxiliary/source domains only | No target image, label, mask, validation set, prompt tuning, hyper-parameter tuning, or model selection | Maintain transferable anomaly semantics and local structures under continual auxiliary learning | Stage-wise zero-shot probing on strictly disjoint target domains, plus Forgetting/BWT |
-
-This distinction is important because a method that performs well in CAD may still rely on target/task exposure during continual adaptation, while LAP requires the model to remain target-zero-shot throughout the auxiliary stream. In our protocol, each auxiliary dataset is visited once, previous auxiliary images/masks are not replayed, and all target datasets are used only for evaluation. Therefore, LAP provides a complementary benchmark to CAD: it measures whether continual learning improves long-term zero-shot anomaly transfer rather than only preserving performance on observed domains.
-
 ### Auxiliary-to-target protocol
 
 The auxiliary and target domains are disjoint. Target domains are used only for evaluation.
@@ -89,6 +75,22 @@ The auxiliary and target domains are disjoint. Target domains are used only for 
 | Medical      | Kvasir           | ISIC          |
 | Medical      | BrainMRI         | Br35H         |
 | Medical      | Br35H            | BrainMRI      |
+
+
+## Relation to Continual Anomaly Detection
+
+We thank the reviewer for pointing out the connection between Lifelong Anomaly Perception (LAP) and Continual Anomaly Detection (CAD). LAP is related to CAD in that both study anomaly detection under sequential domain/task changes. However, LAP targets a different data-access protocol and evaluation goal. Most CAD methods focus on preserving or adapting anomaly detection performance over observed task/domain streams, whereas LAP couples continual auxiliary-domain learning with target-zero-shot transfer to unseen domains.
+
+The key difference is that LAP does not continually adapt on target domains. Instead, labeled auxiliary/source domains arrive sequentially, and target domains are strictly held out for zero-shot evaluation. Thus, LAP evaluates not only anti-forgetting over the auxiliary stream, but also whether the learned anomaly semantics and local structures remain transferable to unseen target domains.
+
+| Setting | Training data | Target access | Goal | Evaluation |
+|---|---|---|---|---|
+| Static zero-shot AD | One fixed auxiliary source or pretrained model | No target training data | Transfer once to unseen targets | Final zero-shot performance |
+| Continual Anomaly Detection (CAD) | Sequential observed task/domain stream | Usually adapts to the observed domains/tasks | Preserve or adapt AD performance over seen domain/task streams | Performance/forgetting on observed or previously seen tasks |
+| LAP | Sequential auxiliary/source domains only | No target image, label, mask, validation set, prompt tuning, hyper-parameter tuning, or model selection | Maintain transferable anomaly semantics and local structures under continual auxiliary learning | Stage-wise zero-shot probing on strictly disjoint target domains, plus Forgetting/BWT |
+
+This distinction is important because a method that performs well in CAD may still rely on target/task exposure during continual adaptation, while LAP requires the model to remain target-zero-shot throughout the auxiliary stream. In our protocol, each auxiliary dataset is visited once, previous auxiliary images/masks are not replayed, and all target datasets are used only for evaluation. Therefore, LAP provides a complementary benchmark to CAD: it measures whether continual learning improves long-term zero-shot anomaly transfer rather than only preserving performance on observed domains.
+
 
 ### Stream-Ordering Protocol under Two-Fold Auxiliary–Target Swap
 
