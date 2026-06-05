@@ -20,7 +20,7 @@ Zero-shot anomaly detection based on vision--language models is typically studie
 
 ## 📝 ACMMM2026 Rebuttal-stage Evidence 👈
 
-We thank the reviewers for their constructive comments. Following their suggestions, this repository is organized as a reviewer-facing evidence page. It clarifies the continual auxiliary-to-target zero-shot protocol and provides additional analyses referenced in the rebuttal, including stage-wise source-update evaluations, old-target trajectories, additional AP/F1 metrics, long-term retention, LAP-vs-CAD comparison, stream-order analysis, SCS implementation details, efficiency results, and continual-learning baselines.
+We thank the reviewers for their constructive comments. Following their suggestions, this repository is organized as a reviewer-facing evidence page. Some items are described in the submitted rebuttal as planned manuscript revisions, while the corresponding reviewer-facing evidence has already been provided here for verification. Specifically, we have provided the stage-wise source-update evaluations, old-target trajectories, additional AP/F1 metrics, long-term retention summary, LAP-vs-CAD comparison, stream-order analysis, SCS implementation details, efficiency results, and replay-free continual-learning baselines, including EWC and LwF/KD results under the same LAP stream.
 
 **Protocol reminder.** LAP is auxiliary-supervised but target-zero-shot: the model is continually updated only on sequentially arriving auxiliary/source domains, while target domains are strictly held out and used only for zero-shot evaluation. No target image, label, mask, validation set, test sample, prompt tuning, hyper-parameter tuning, or model selection is used.
 
