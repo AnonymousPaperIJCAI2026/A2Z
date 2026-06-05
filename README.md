@@ -123,7 +123,7 @@ Auxiliary stream:
 
 ```text
 MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
-````
+```
 
 | Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
 | ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
