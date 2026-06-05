@@ -104,7 +104,6 @@ At each step, the model is trained only on the newly arriving auxiliary source. 
 
 Auxiliary stream:
 
-```bash
 MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
 
 | Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
@@ -120,7 +119,6 @@ MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
 
 Auxiliary stream:
 
-```bash
 VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
 
 | Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
