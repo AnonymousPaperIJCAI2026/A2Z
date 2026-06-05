@@ -261,6 +261,20 @@ These results show that the proposed continual auxiliary-to-target adaptation do
 
 **Measurement details.** Speed and latency are measured during inference. Peak memory denotes the maximum GPU memory usage under the same evaluation setting. Data loading time is excluded from the reported inference speed and latency.
 
+
+## Continual Adaptation Performance and Forgetting Analysis with EWC and LwF/KD
+| Method | Domain | iAUROC | iAP | iF1 | pAUROC | PRO | pAP | pF1 | F_iAUROC | F_iAP | F_pAUROC | F_PRO |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| EWC | Industrial Avg. | 89.29 | 91.52 | 88.40 | 93.38 | 82.47 | 37.04 | 40.17 | - | - | - | - |
+| EWC | Medical Avg. | 99.22 | 99.23 | 97.65 | 91.91 | 81.71 | 75.95 | 70.52 | - | - | - | - |
+| **EWC** | **Overall Avg.** | **91.78** | **93.45** | **90.71** | **92.79** | **82.17** | **52.60** | **52.31** | **1.43** | **0.96** | **2.77** | **4.40** |
+| LwF/KD | Industrial Avg. | 90.94 | 91.82 | 88.64 | 95.16 | 86.61 | 42.78 | 44.83 | - | - | - | - |
+| LwF/KD | Medical Avg. | 99.47 | 99.56 | 97.87 | 93.46 | 83.31 | 76.86 | 71.69 | - | - | - | - |
+| **LwF/KD** | **Overall Avg.** | **93.07** | **93.75** | **90.94** | **94.48** | **85.29** | **56.41** | **55.57** | **0.31** | **0.56** | **0.96** | **1.37** |
+| A2T | Industrial Avg. | 91.84 | 93.32 | 90.08 | 94.40 | 86.09 | 38.88 | 42.01 | - | - | - | - |
+| A2T | Medical Avg. | 99.55 | 99.59 | 97.99 | 90.57 | 75.81 | 70.20 | 66.25 | - | - | - | - |
+| **A2T** | **Overall Avg.** | 🟩 **93.77** | 🟩 **94.88** | 🟩 **92.06** | 🟩 **92.87** | 🟩 **81.98** | 🟩 **51.41** | 🟩 **51.70** | **0.42** | **0.47** | **2.13** | **3.87** |
+
 ### Code release status
 
 The codebase is being organized for reproducibility. We are preparing the following components:
