@@ -18,134 +18,36 @@ Zero-shot anomaly detection based on vision--language models is typically studie
 <div align="center"> <img src="images/fig2.png " width="100%"> </div>
 
 
-## 🚀 Get Started
-
-⚙️ Environment
-- python >= 3.8.5
-- pytorch >= 1.10.0
-- torchvision >= 0.11.1
-- numpy >= 1.19.2
-- scipy >= 1.5.2
-- kornia >= 0.6.1
-- pandas >= 1.1.3
-- opencv-python >= 4.5.4
-- pillow
-- tqdm
-- ftfy
-- regex
-
-### Device
-Single NVIDIA A40 GPU
-
-## 📦 Pretrained model
-- CLIP: ##################################################################
-
-    👉 Download and put it under `CLIP/ckpt` folder
-
-
-
-## 🏥🏭 Medical and Industrial Anomaly Detection Benchmark(2D\3D)
-
-1. We will provide the pre-processed benchmark. Please download the following dataset
-
-    
-
-2. Place it within the master directory `data` and unzip the dataset.
-
-    ```
-    
-    ```
-
-
-## 📂 File Structure
-After the preparation work, the whole project should have the following structure:
-
-```
-code
-├─ ckpt
-│  └─ zero-shot
-├─ CLIP
-│  ├─ bpe_simple_vocab_16e6.txt.gz
-│  ├─ ckpt
-│  │  └─ ViT-L-14-336px.pt
-│  ├─ clip.py
-│  ├─ model.py
-│  ├─ models.py
-│  ├─ model_configs
-│  │  └─ ViT-L-14-336.json
-│  ├─ modified_resnet.py
-│  ├─ openai.py
-│  ├─ tokenizer.py
-│  └─ transformer.py
-├─ data
-│  ├─ Mvtec3D
-│  │  ├─ valid
-│  │  └─ test
-│  ├─ BrainMRI
-│  │  ├─ valid
-│  │  └─ test
-│  ├─ Mvtec
-│  │  ├─ valid
-│  │  └─ test
-│  ├─ ...
-│  └─ Visa
-│     ├─ valid
-│     └─ test
-├─ dataset
-│  ├─ fewshot_seed
-│  │  └─ Mvtec3D
-│  ├─ medical_few.py
-│  └─ medical_zero.py
-├─ loss.py
-├─ readme.md
-├─ train_few.py
-├─ train_zero.py
-├─ test.py
-└─ utils.py
-
-```
-
-
-## ⚡ Quick Start
-
-`python test.py`
-
-For example, to test on the BrainMRI , simply run:
-
-`###########################`
-
-### Training
-
-`python train_zero.py`
-
-
 ## 📝 ACMMM2026 Rebuttal Status
 
-This repository is currently being updated for the ACM rebuttal period.
-We are actively improving the reproducibility, protocol clarity, and supplementary experimental results of A2T.
+We thank the reviewer for this insightful comment. Following the reviewer’s suggestion, we have completed the rebuttal-stage updates for this repository. We have added protocol clarifications, supplementary evaluation results, stage-wise continual probes, and efficiency analyses to improve the reproducibility and clarity of A2T.
 
 ### Current rebuttal-stage updates
 
 * **Protocol clarification.**
-  We clarify that A2T follows a continual **auxiliary-to-target zero-shot** protocol. The model is updated only on the auxiliary-domain stream, while target domains are strictly used for evaluation.
+  We have clarified that A2T follows a continual **auxiliary-to-target zero-shot** protocol. The model is updated only on the auxiliary-domain stream, while target domains are strictly used for evaluation.
 
 * **No target-domain adaptation.**
-  No target-domain image, label, mask, validation set, or test sample is used for training, hyper-parameter selection, or model updating.
+  We explicitly state that no target-domain image, label, mask, validation set, or test sample is used for training, hyper-parameter selection, or model updating.
 
 * **Auxiliary-domain stream.**
-  The continual stream consists of sequentially arriving auxiliary domains. At step `t`, the model only accesses the current auxiliary dataset `A_t`.
+  We have specified that the continual stream consists of sequentially arriving auxiliary domains. At step `t`, the model only accesses the current auxiliary dataset `A_t`.
 
 * **Zero-shot definition.**
-  The term **zero-shot** refers to zero-shot generalization to unseen target domains. It does not mean that the method is training-free, since auxiliary-domain supervision is used.
+  We have clarified that **zero-shot** refers to zero-shot generalization to unseen target domains. It does not mean that the method is training-free, since auxiliary-domain supervision is used.
 
 * **Additional evaluation metrics.**
-  Following reviewer suggestions, we additionally report pixel-level AP and max-F1, besides image-level AUROC/AP and pixel-level AUROC/PRO.
+  Following reviewer suggestions, we have added pixel-level AP and max-F1, as well as image-level max-F1, besides the original image-level AUROC/AP and pixel-level AUROC/PRO.
 
 * **Stage-wise continual evaluation.**
-  We provide stage-wise results after each auxiliary-domain update to show how target-domain transferability changes during continual learning.
+  We now provide stage-wise results after each auxiliary-domain update to show how target-domain transferability changes during continual learning.
 
 * **Baseline protocol clarification.**
-  Training-free baselines such as WinCLIP are evaluated without adaptation. Adaptation-based baselines are evaluated under their corresponding single-adaptation or continual-extension settings.
+  We have clarified that training-free baselines such as WinCLIP are evaluated without adaptation, while adaptation-based baselines are evaluated under their corresponding single-adaptation or continual-extension settings.
+
+* **Efficiency and complexity analysis.**
+  We have added model size, trainable parameters, inference speed, latency, and peak memory comparisons under the same inference protocol.
+
 
 ### Auxiliary-to-target protocol
 
@@ -297,7 +199,105 @@ We are updating the following components:
 
 A cleaner version with complete running commands and checkpoints will be updated during the rebuttal period.
 
+## 🚀 Get Started
 
+⚙️ Environment
+- python >= 3.8.5
+- pytorch >= 1.10.0
+- torchvision >= 0.11.1
+- numpy >= 1.19.2
+- scipy >= 1.5.2
+- kornia >= 0.6.1
+- pandas >= 1.1.3
+- opencv-python >= 4.5.4
+- pillow
+- tqdm
+- ftfy
+- regex
+
+### Device
+Single NVIDIA A40 GPU
+
+## 📦 Pretrained model
+- CLIP: ##################################################################
+
+    👉 Download and put it under `CLIP/ckpt` folder
+
+
+
+## 🏥🏭 Medical and Industrial Anomaly Detection Benchmark(2D\3D)
+
+1. We will provide the pre-processed benchmark. Please download the following dataset
+
+    
+
+2. Place it within the master directory `data` and unzip the dataset.
+
+    ```
+    
+    ```
+
+
+## 📂 File Structure
+After the preparation work, the whole project should have the following structure:
+
+```
+code
+├─ ckpt
+│  └─ zero-shot
+├─ CLIP
+│  ├─ bpe_simple_vocab_16e6.txt.gz
+│  ├─ ckpt
+│  │  └─ ViT-L-14-336px.pt
+│  ├─ clip.py
+│  ├─ model.py
+│  ├─ models.py
+│  ├─ model_configs
+│  │  └─ ViT-L-14-336.json
+│  ├─ modified_resnet.py
+│  ├─ openai.py
+│  ├─ tokenizer.py
+│  └─ transformer.py
+├─ data
+│  ├─ Mvtec3D
+│  │  ├─ valid
+│  │  └─ test
+│  ├─ BrainMRI
+│  │  ├─ valid
+│  │  └─ test
+│  ├─ Mvtec
+│  │  ├─ valid
+│  │  └─ test
+│  ├─ ...
+│  └─ Visa
+│     ├─ valid
+│     └─ test
+├─ dataset
+│  ├─ fewshot_seed
+│  │  └─ Mvtec3D
+│  ├─ medical_few.py
+│  └─ medical_zero.py
+├─ loss.py
+├─ readme.md
+├─ train_few.py
+├─ train_zero.py
+├─ test.py
+└─ utils.py
+
+```
+
+
+## ⚡ Quick Start
+
+`python test.py`
+
+For example, to test on the BrainMRI , simply run:
+
+`###########################`
+
+### Training
+
+`python train_zero.py`
 
 
 
