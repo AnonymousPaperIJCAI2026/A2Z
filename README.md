@@ -121,7 +121,7 @@ At each step, the model is trained only on the newly arriving auxiliary source. 
 `N/A` indicates that the corresponding metric is not applicable, e.g., image-level metrics for medical segmentation datasets with only anomalous test images, or old-target change at the first step.
 
 ### Table GH-2a. Baseline for Verifying Catastrophic Forgetting in ZSIAD
-| Metric | Test set | I: MVTec only | I+M: MVTec+MPDD+DTD+ClinicDB+ISIC+BrainMRI | Δ |
+| Metric | Test set(J/N) | I: MVTec only | I+M: MVTec+MPDD+DTD+ClinicDB+ISIC+BrainMRI | Δ |
 |---|---|---:|---:|---:|
 | Image AUROC / AP | VisA | 88.5 / 90.0 | 87.4 / 89.0 | -1.1 / -1.0 |
 | Image AUROC / AP | BTAD | 94.3 / 95.2 | 92.9 / 89.9 | -1.4 / -5.3 |
