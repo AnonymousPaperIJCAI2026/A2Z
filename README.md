@@ -120,7 +120,22 @@ At each step, the model is trained only on the newly arriving auxiliary source. 
 
 `N/A` indicates that the corresponding metric is not applicable, e.g., image-level metrics for medical segmentation datasets with only anomalous test images, or old-target change at the first step.
 
-### Table GH-2a. Fold-1 stage-wise zero-shot probe matrix
+### Table GH-2a. Baseline for Verifying Catastrophic Forgetting in ZSIAD
+| Metric | Test set | I: MVTec only | I+M: MVTec+MPDD+DTD+ClinicDB+ISIC+BrainMRI | Δ |
+|---|---|---:|---:|---:|
+| Image AUROC / AP | VisA | 88.5 / 90.0 | 87.4 / 89.0 | -1.1 / -1.0 |
+| Image AUROC / AP | BTAD | 94.3 / 95.2 | 92.9 / 89.9 | -1.4 / -5.3 |
+| Image AUROC / AP | DAGM | 98.5 / 93.8 | 99.2 / 96.9 | +0.7 / +3.1 |
+| Image AUROC / AP | Br35H | 96.7 / 96.4 | 98.7 / 98.6 | +2.0 / +2.2 |
+| **Average** | — | **94.5 / 93.9** | **94.6 / 93.6** | **+0.1 / -0.2** |
+| Pixel AUROC / PRO | VisA | 96.2 / 88.7 | 94.1 / 82.0 | -2.1 / -6.7 |
+| Pixel AUROC / PRO | BTAD | 94.4 / 78.3 | 76.4 / 40.8 | -18.0 / -37.5 |
+| Pixel AUROC / PRO | DAGM | 96.4 / 91.2 | 87.2 / 68.2 | -9.2 / -23.0 |
+| Pixel AUROC / PRO | ColonDB | 83.2 / 67.9 | 87.9 / 60.9 | +4.7 / -7.0 |
+| Pixel AUROC / PRO | Kvasir | 84.5 / 56.9 | 93.9 / 71.9 | +9.4 / +15.0 |
+| **Average** | — | **90.9 / 76.6** | **87.9 / 64.7** | **-3.0 / -11.9** |
+
+### Table GH-2b. Fold-1 stage-wise zero-shot probe matrix
 
 Auxiliary stream:
 
@@ -137,7 +152,7 @@ MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
 | 5    | DTD          | DAGM                |      98.11 |   53.95 |   54.76 |   93.61 |            +0.34 |         -2.50 |         -1.70 |         -0.71 |
 | 6    | BrainMRI     | Br35H               |      99.55 |     N/A |     N/A |     N/A |            -0.07 |         -3.39 |         -2.27 |         -1.58 |
 
-### Table GH-2b. Fold-2 stage-wise zero-shot probe matrix
+### Table GH-2c. Fold-2 stage-wise zero-shot probe matrix
 
 Auxiliary stream:
 
