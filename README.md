@@ -19,35 +19,42 @@ Zero-shot anomaly detection based on vision--language models is typically studie
 
 
 ## 📝 ACMMM2026 Rebuttal Status 👈
-
-We thank the reviewers for their constructive comments. Following the reviewers’ suggestions, we have completed the rebuttal-stage updates for this repository. We have clarified the continual auxiliary-to-target zero-shot protocol, added stage-wise source-update evaluations and two-fold old-target trajectories, reported additional pixel-level AP/F1 metrics, and included stream-order, long-term retention, baseline-fairness, implementation-detail, and efficiency analyses. These updates aim to make the A2T setting, evaluation protocol, and deployment cost clearer and more reproducible.
-
+We thank the reviewers for their constructive comments. Following their suggestions, we have updated this repository to clarify the continual auxiliary-to-target zero-shot protocol and provide additional analyses for easier verification. Specifically, we clarify the data-access constraints of LAP, add stage-wise source-update evaluations and two-fold old-target trajectories, report additional image-/pixel-level F1 and AP metrics, and include analyses on stream order, long-term retention, baseline fairness, implementation details, and efficiency. These updates aim to make the A2T setting, evaluation protocol, and deployment cost clearer.
 
 ### Current rebuttal-stage updates
 
-* **Protocol clarification.**
-  We have clarified that A2T follows a continual **auxiliary-to-target zero-shot** protocol. The model is updated only on the auxiliary-domain stream, while target domains are strictly used for evaluation.
+* **Protocol clarification.**  
+  We clarify that A2T follows a continual **auxiliary-to-target zero-shot** protocol. The model is updated only on the auxiliary-domain stream, while target domains are strictly used for zero-shot evaluation.
 
-* **No target-domain adaptation.**
-  We explicitly state that no target-domain image, label, mask, validation set, or test sample is used for training, hyper-parameter selection, or model updating.
+* **No target-domain adaptation.**  
+  No target-domain image, label, mask, validation set, test sample, prompt tuning, hyper-parameter tuning, or model selection is used for training or model updating.
 
-* **Auxiliary-domain stream.**
-  We have specified that the continual stream consists of sequentially arriving auxiliary domains. At step `t`, the model only accesses the current auxiliary dataset `A_t`.
+* **Auxiliary-domain stream.**  
+  The continual stream consists of sequentially arriving auxiliary/source domains. At step `t`, the model only accesses the current auxiliary dataset `A_t`; previous auxiliary images/masks are not replayed.
 
-* **Zero-shot definition.**
-  We have clarified that **zero-shot** refers to zero-shot generalization to unseen target domains. It does not mean that the method is training-free, since auxiliary-domain supervision is used.
+* **Zero-shot definition.**  
+  Here, **zero-shot** means zero-shot generalization to unseen target domains. It does not mean training-free inference, since auxiliary-domain supervision is used during continual learning.
 
-* **Additional evaluation metrics.**
-  Following reviewer suggestions, we have added pixel-level AP and max-F1, as well as image-level max-F1, besides the original image-level AUROC/AP and pixel-level AUROC/PRO.
+* **Relation to CAD.**  
+  We add a discussion comparing Lifelong Anomaly Perception (LAP) with Continual Anomaly Detection (CAD), highlighting their differences in data access, target-domain exposure, and evaluation goal.
 
-* **Stage-wise continual evaluation.**
-  We now provide stage-wise results after each auxiliary-domain update to show how target-domain transferability changes during continual learning.
+* **Stage-wise continual evaluation.**  
+  We provide stage-wise results after each auxiliary-domain update to show how target-domain transferability changes during continual learning.
 
-* **Baseline protocol clarification.**
-  We have clarified that training-free baselines such as WinCLIP are evaluated without adaptation, while adaptation-based baselines are evaluated under their corresponding single-adaptation or continual-extension settings.
+* **Additional evaluation metrics.**  
+  Following reviewer suggestions, we report pixel-level AP and max-F1, as well as image-level max-F1, in addition to the original image-level AUROC/AP and pixel-level AUROC/PRO.
 
-* **Efficiency and complexity analysis.**
-  We have added model size, trainable parameters, inference speed, latency, and peak memory comparisons under the same inference protocol.
+* **Baseline protocol clarification.**  
+  We clarify that training-free baselines such as WinCLIP are evaluated without adaptation, while adaptation-based baselines are evaluated under their corresponding single-adaptation or continual-extension settings.
+
+* **Stream-order analysis.**  
+  We include results under multiple auxiliary-domain stream orders to analyze the sensitivity of LAP to task/domain ordering.
+
+* **Basis construction and overhead.**  
+  We provide implementation details for the historical activation basis used in SCS, including SVD-based direction selection, QR-based re-orthogonalization, rank cap, and storage overhead.
+
+* **Efficiency and complexity analysis.**  
+  We report model size, trainable parameters, inference speed, latency, and peak memory under the same inference protocol.
 
 
 ## Relation to Continual Anomaly Detection
