@@ -13,7 +13,8 @@ Zero-shot anomaly detection based on vision--language models is typically studie
 
 </div>
 
-📴**Keywords**: Zero-/Few-Shot, Cross domian, Large Vision-Language Model, Anomaly Classification and Segmentation
+📴**Keywords**: Zero-/Few-Shot Anomaly Detection, Cross-Domain Generalization, Vision-Language Models, Continual Learning
+
 
 <div align="center"> <img src="images/fig2.png " width="100%"> </div>
 
