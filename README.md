@@ -98,25 +98,14 @@ To directly answer the reviewer’s question about “the performance after usin
 
 At each step, the model is trained only on the newly arriving auxiliary source. All listed target domains are held out and used only for evaluation. The columns `Avg. old-target Δ` report the average performance change on previously evaluated target domains, compared with their performance when they first appeared.
 
-#### Table R1a. A2T stage-wise results, Fold-1
+`N/A` indicates that the corresponding metric is not applicable, e.g., image-level metrics for medical segmentation datasets with only anomalous test images, or old-target change at the first step.
+
+#### Fold-1: Stage-wise zero-shot probe results
 
 Auxiliary stream:
 
 ```bash
 MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
-```
-
-#### Table R1b. A2T stage-wise results, Fold-2
-
-Auxiliary stream:
-
-```bash
-VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
-```
-
-`N/A` indicates that the corresponding metric is not applicable, e.g., image-level metrics for medical segmentation datasets with only anomalous test images, or old-target change at the first step.
-
-##### Fold-1: Stage-wise results
 
 | Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
 | ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
@@ -127,7 +116,12 @@ VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
 | 5 | DTD | DAGM | 98.11 | 53.95 | 54.76 | 93.61 | +0.34 | -2.50 | -1.70 | -0.71 |
 | 6 | BrainMRI | Br35H | 99.55 | N/A | N/A | N/A | -0.07 | -3.39 | -2.27 | -1.58 |
 
-##### Fold-2: Stage-wise results
+#### Fold-2: Stage-wise zero-shot probe results
+
+Auxiliary stream:
+
+```bash
+VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
 
 | Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
 | ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
