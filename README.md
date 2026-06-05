@@ -409,11 +409,11 @@ We add replay-free EWC and LwF/KD baselines under the same auxiliary-domain stre
 
 ### Table GH-10c. Training-state overhead and inference-side cost of replay-free CL baselines
 
-| Method | Data replay? | Previous auxiliary data stored? | Inference Params (M) | Trainable Params (M) | Trainable (%) | Extra training-time state | Extra state scale | Extra inference state |
-|---|---|---|---:|---:|---:|---|---|---|
-| EWC | No | No | 431.11 | 3.17 | 0.735 | Diagonal Fisher + previous parameter snapshot | ~2× trainable params | None |
-| LwF/KD | No | No | 431.11 | 3.17 | 0.735 | In-memory frozen previous-stage teacher | ~1× full model weights during training | None |
-| A2T | No | No | 431.11 | 3.17 | 0.735 | Lightweight SCS adaptation state | Only on trainable adaptation modules | None |
+| Method | Data replay | Previous auxiliary data stored | Inference Params (M) | Trainable Params (M) | Trainable (%) | Extra training-time state | Extra state scale | Expected training memory overhead | Extra inference state |
+|---|---|---|---:|---:|---:|---|---|---|---|
+| EWC | No | No | 431.11 | 3.17 | 0.735 | Diagonal Fisher + previous parameter snapshot | ~2× trainable params | Low, about 2× trainable-state storage | None |
+| LwF/KD | No | No | 431.11 | 3.17 | 0.735 | In-memory frozen previous-stage teacher | ~1× full model weights during training | Higher, adds one frozen teacher weight copy | None |
+| A2T | No | No | 431.11 | 3.17 | 0.735 | Lightweight SCS adaptation state | Only on trainable adaptation modules | Low, only adaptation-module state | None |
 
 **Note.**  
 “Data replay” means storing and replaying previous auxiliary images, labels, or masks. All three variants are data-replay-free. EWC stores per-parameter Fisher statistics and a previous parameter snapshot. LwF/KD keeps a frozen previous-stage teacher model in memory during training for distillation; because the teacher is evaluated without gradient computation, this mainly adds one extra copy of model weights rather than a full second set of gradients and optimizer states. A2T does not store previous auxiliary data, previous-stage teachers, or full parameter snapshots; it only maintains lightweight SCS adaptation state for the trainable adaptation modules and introduces no extra inference-time state.
