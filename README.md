@@ -175,6 +175,7 @@ In Fold-2, the source-target role is swapped: VisA is first used as the source a
 
 Together, the probe matrix and two old-target trajectories answer the reviewer’s concern from two complementary views. The probe matrix reports the stage-wise performance after each newly added auxiliary source and the cumulative average change on old targets. The trajectory tables show the direct step-to-step change of a previously evaluated target after each new source is added. Both folds confirm that the model is updated only on auxiliary sources, while targets remain held out for zero-shot evaluation.
 
+**Analysis.** The matrix directly clarifies that LAP performs continual updates on source/auxiliary datasets, not on target/test data. For instance, in Fold-1, after training only on MVTec, the held-out VisA target obtains 87.90 iAUROC and 26.96/33.60/88.11 pAP/pF1/PRO. After adding the next source ClinicDB, the model is updated only on ClinicDB, while VisA remains test-only; its change is +0.22 iAUROC and -1.63/-1.72/-1.59 pAP/pF1/PRO. The later steps repeat this evaluation for all old targets, making the transfer-forgetting dynamics explicit. The Fold-2 MVTec trajectory further verifies the same protocol under source-target role swap. Thus, all target domains remain zero-shot probes, and the reported pAP/pF1 metrics address the reviewer’s pixel-level evaluation concern.
 
 
 
