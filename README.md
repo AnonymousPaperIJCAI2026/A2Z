@@ -20,7 +20,7 @@ Zero-shot anomaly detection based on vision--language models is typically studie
 
 ## 📝 ACMMM2026 Rebuttal Status 👈
 
-We thank the reviewer for this insightful comment. Following the reviewer’s suggestion, we have completed the rebuttal-stage updates for this repository. We have added protocol clarifications, supplementary evaluation results, stage-wise continual probes, and efficiency analyses to improve the reproducibility and clarity of A2T.
+We thank the reviewers for their constructive comments. Following the reviewer’s suggestion, we have completed the rebuttal-stage updates for this repository. We have added protocol clarifications, supplementary evaluation results, stage-wise continual probes, and efficiency analyses to improve the reproducibility and clarity of A2T.
 
 ### Current rebuttal-stage updates
 
