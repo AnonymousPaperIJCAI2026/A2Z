@@ -92,78 +92,90 @@ Importantly, Fold-1 and Fold-2 are independent runs initialized from the same pr
 
 For every run, only the current auxiliary domain is used for model updating at each stream step. The corresponding target probes are strictly held out and are never used for training, prompt tuning, hyper-parameter selection, or model updating.
 
-### Stage-wise zero-shot probe matrix
+
+### Stage-wise zero-shot probe matrix and old-target trajectory
 
 To directly answer the reviewer’s question about “the performance after using source dataset A and the change after adding source dataset B,” we report stage-wise zero-shot evaluation after each auxiliary-domain update.
 
-At each step, the model is trained only on the newly arriving auxiliary source. All listed target domains are held out and used only for evaluation. The columns `Avg. old-target Δ` report the average performance change on previously evaluated target domains, compared with their performance when they first appeared.
+At each step, the model is trained only on the newly arriving auxiliary source. All listed target domains are held out and used only for evaluation. No target-domain images are used for training, prompt tuning, hyper-parameter selection, or model updating.
+
+In the probe matrix, `Avg. old-target Δ` reports the average performance change on previously evaluated target domains, compared with their performance when they first appeared. This measures cumulative retention/forgetting after each new auxiliary source is added.
 
 `N/A` indicates that the corresponding metric is not applicable, e.g., image-level metrics for medical segmentation datasets with only anomalous test images, or old-target change at the first step.
+
+For compactness, the probe matrix reports image-level iAUROC and pixel-level pAP/pF1/PRO. The following trajectory tables further provide full iAUROC/iAP and pAUROC/pAP/pF1/PRO changes for representative old targets in the two-fold swap setting.
 
 #### Fold-1: Stage-wise zero-shot probe results
 
 Auxiliary stream:
 
+```text
 MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
+````
 
 | Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
 | ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
-| 1 | MVTec | VisA | 87.90 | 26.96 | 33.60 | 88.11 | N/A | N/A | N/A | N/A |
-| 2 | ClinicDB | ColonDB | N/A | 63.82 | 60.43 | 82.61 | +0.22 | -1.63 | -1.72 | -1.59 |
-| 3 | MPDD | BTAD | 94.67 | 38.53 | 44.36 | 74.82 | +0.24 | -0.86 | -1.08 | +0.46 |
-| 4 | ISIC | Kvasir | N/A | 82.09 | 74.66 | 77.60 | -0.42 | -3.17 | -1.67 | -2.04 |
-| 5 | DTD | DAGM | 98.11 | 53.95 | 54.76 | 93.61 | +0.34 | -2.50 | -1.70 | -0.71 |
-| 6 | BrainMRI | Br35H | 99.55 | N/A | N/A | N/A | -0.07 | -3.39 | -2.27 | -1.58 |
+| 1    | MVTec        | VisA                |      87.90 |   26.96 |   33.60 |   88.11 |              N/A |           N/A |           N/A |           N/A |
+| 2    | ClinicDB     | ColonDB             |        N/A |   63.82 |   60.43 |   82.61 |            +0.22 |         -1.63 |         -1.72 |         -1.59 |
+| 3    | MPDD         | BTAD                |      94.67 |   38.53 |   44.36 |   74.82 |            +0.24 |         -0.86 |         -1.08 |         +0.46 |
+| 4    | ISIC         | Kvasir              |        N/A |   82.09 |   74.66 |   77.60 |            -0.42 |         -3.17 |         -1.67 |         -2.04 |
+| 5    | DTD          | DAGM                |      98.11 |   53.95 |   54.76 |   93.61 |            +0.34 |         -2.50 |         -1.70 |         -0.71 |
+| 6    | BrainMRI     | Br35H               |      99.55 |     N/A |     N/A |     N/A |            -0.07 |         -3.39 |         -2.27 |         -1.58 |
 
 #### Fold-2: Stage-wise zero-shot probe results
 
 Auxiliary stream:
 
+```text
 VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
+```
 
 | Step | Added source | New held-out target | New iAUROC | New pAP | New pF1 | New PRO | Avg. old ΔiAUROC | Avg. old ΔpAP | Avg. old ΔpF1 | Avg. old ΔPRO |
 | ---- | ------------ | ------------------- | ---------: | ------: | ------: | ------: | ---------------: | ------------: | ------------: | ------------: |
-| 1 | VisA | MVTec | 93.49 | 46.99 | 47.99 | 85.85 | N/A | N/A | N/A | N/A |
-| 2 | ColonDB | ClinicDB | N/A | 79.38 | 71.83 | 88.52 | -0.79 | -2.94 | -1.93 | -2.76 |
-| 3 | BTAD | MPDD | 77.13 | 24.62 | 26.61 | 83.88 | -0.45 | -1.71 | -1.52 | -0.99 |
-| 4 | Kvasir | ISIC | N/A | 83.80 | 77.37 | 82.91 | -0.19 | +0.63 | +0.95 | -0.25 |
-| 5 | DAGM | DTD | 98.92 | 61.59 | 58.99 | 79.02 | -0.28 | -3.17 | -1.72 | -8.44 |
-| 6 | Br35H | BrainMRI | 99.55 | N/A | N/A | N/A | +0.34 | -6.14 | -4.45 | -1.86 |
+| 1    | VisA         | MVTec               |      93.49 |   46.99 |   47.99 |   85.85 |              N/A |           N/A |           N/A |           N/A |
+| 2    | ColonDB      | ClinicDB            |        N/A |   79.38 |   71.83 |   88.52 |            -0.79 |         -2.94 |         -1.93 |         -2.76 |
+| 3    | BTAD         | MPDD                |      77.13 |   24.62 |   26.61 |   83.88 |            -0.45 |         -1.71 |         -1.52 |         -0.99 |
+| 4    | Kvasir       | ISIC                |        N/A |   83.80 |   77.37 |   82.91 |            -0.19 |         +0.63 |         +0.95 |         -0.25 |
+| 5    | DAGM         | DTD                 |      98.92 |   61.59 |   58.99 |   79.02 |            -0.28 |         -3.17 |         -1.72 |         -8.44 |
+| 6    | Br35H        | BrainMRI            |      99.55 |     N/A |     N/A |     N/A |            +0.34 |         -6.14 |         -4.45 |         -1.86 |
 
-These results directly instantiate the reviewer’s I/M/J/N example: after learning each auxiliary source, we evaluate its related held-out target; after adding each new source, we report both the new target performance and the average change on previously evaluated targets. This makes the transfer-forgetting dynamics explicit without using any target-domain data for training.
+These results directly instantiate the reviewer’s source-update question: after learning each auxiliary source, we evaluate its related held-out target; after adding each new source, we report both the new target performance and the average change on previously evaluated targets. This makes the transfer-forgetting dynamics explicit without using any target-domain data for training.
 
-
+---
 
 #### Two-fold old-target trajectory after each source update
 
-To explicitly answer how a previously evaluated target changes after adding new source datasets, we report old-target trajectories in both folds.  
-For each row, `Δ vs. prev. step` is computed as the score after adding the current source minus the score after the immediately preceding source update.
+To further show the direct effect of adding each new source dataset, we report representative old-target trajectories in both folds. Unlike the probe matrix above, here `Δ vs. prev. step` is computed as the score after adding the current source minus the score after the immediately preceding source update.
 
 ##### Fold-1 old-target example: VisA
 
 In Fold-1, MVTec is first used as the source and VisA is evaluated as the paired target. From Step 2 onward, VisA becomes an old target, and the table reports how its performance changes after each newly added source dataset.
 
-| Step | New source added | Source datasets seen so far | Target probe | iAUROC/iAP | Δ iAUROC/iAP vs. prev. step | pAUROC/pAP/pF1/PRO | Δ pAUROC/pAP/pF1/PRO vs. prev. step |
-|---:|---|---|---|---:|---:|---:|---:|
-| 1 | MVTec | MVTec | VisA | 87.90/89.57 | N/A | 96.13/26.96/33.60/88.11 | N/A |
-| 2 | ClinicDB | MVTec, ClinicDB | VisA | 88.11/89.73 | +0.22/+0.16 | 95.97/25.34/31.88/86.52 | -0.16/-1.63/-1.72/-1.59 |
-| 3 | MPDD | MVTec, ClinicDB, MPDD | VisA | 88.14/89.84 | +0.02/+0.11 | 96.02/25.29/31.76/87.69 | +0.06/-0.05/-0.12/+1.16 |
-| 4 | ISIC | MVTec, ClinicDB, MPDD, ISIC | VisA | 88.25/89.94 | +0.12/+0.10 | 96.01/24.72/31.05/87.72 | -0.02/-0.57/-0.72/+0.03 |
-| 5 | DTD | MVTec, ClinicDB, MPDD, ISIC, DTD | VisA | 88.44/90.03 | +0.18/+0.09 | 95.94/24.68/30.81/87.40 | -0.07/-0.04/-0.24/-0.32 |
-| 6 | BrainMRI | MVTec, ClinicDB, MPDD, ISIC, DTD, BrainMRI | VisA | 87.64/89.03 | -0.80/-1.00 | 96.04/25.66/32.04/88.62 | +0.10/+0.97/+1.23/+1.22 |
+| Step | New source added | Source datasets seen so far                | Target probe |  iAUROC/iAP | Δ iAUROC/iAP vs. prev. step |      pAUROC/pAP/pF1/PRO | Δ pAUROC/pAP/pF1/PRO vs. prev. step |
+| ---: | ---------------- | ------------------------------------------ | ------------ | ----------: | --------------------------: | ----------------------: | ----------------------------------: |
+|    1 | MVTec            | MVTec                                      | VisA         | 87.90/89.57 |                         N/A | 96.13/26.96/33.60/88.11 |                                 N/A |
+|    2 | ClinicDB         | MVTec, ClinicDB                            | VisA         | 88.11/89.73 |                 +0.22/+0.16 | 95.97/25.34/31.88/86.52 |             -0.16/-1.63/-1.72/-1.59 |
+|    3 | MPDD             | MVTec, ClinicDB, MPDD                      | VisA         | 88.14/89.84 |                 +0.02/+0.11 | 96.02/25.29/31.76/87.69 |             +0.06/-0.05/-0.12/+1.16 |
+|    4 | ISIC             | MVTec, ClinicDB, MPDD, ISIC                | VisA         | 88.25/89.94 |                 +0.12/+0.10 | 96.01/24.72/31.05/87.72 |             -0.02/-0.57/-0.72/+0.03 |
+|    5 | DTD              | MVTec, ClinicDB, MPDD, ISIC, DTD           | VisA         | 88.44/90.03 |                 +0.18/+0.09 | 95.94/24.68/30.81/87.40 |             -0.07/-0.04/-0.24/-0.32 |
+|    6 | BrainMRI         | MVTec, ClinicDB, MPDD, ISIC, DTD, BrainMRI | VisA         | 87.64/89.03 |                 -0.80/-1.00 | 96.04/25.66/32.04/88.62 |             +0.10/+0.97/+1.23/+1.22 |
 
 ##### Fold-2 old-target example: MVTec
 
 In Fold-2, the source-target role is swapped: VisA is first used as the source and MVTec is evaluated as the paired target. From Step 2 onward, MVTec becomes an old target, and the table reports its change after adding each new source dataset.
 
-| Step | New source added | Source datasets seen so far | Target probe | iAUROC/iAP | Δ iAUROC/iAP vs. prev. step | pAUROC/pAP/pF1/PRO | Δ pAUROC/pAP/pF1/PRO vs. prev. step |
-|---:|---|---|---|---:|---:|---:|---:|
-| 1 | VisA | VisA | MVTec | 93.49/97.23 | N/A | 92.44/46.99/47.99/85.85 | N/A |
-| 2 | ColonDB | VisA, ColonDB | MVTec | 92.70/96.67 | -0.79/-0.56 | 91.31/44.05/46.06/83.10 | -1.12/-2.94/-1.93/-2.76 |
-| 3 | BTAD | VisA, ColonDB, BTAD | MVTec | 93.03/96.84 | +0.34/+0.17 | 91.66/45.27/46.63/83.53 | +0.35/+1.22/+0.57/+0.43 |
-| 4 | Kvasir | VisA, ColonDB, BTAD, Kvasir | MVTec | 92.07/96.44 | -0.96/-0.39 | 90.53/41.13/43.46/82.84 | -1.13/-4.14/-3.17/-0.69 |
-| 5 | DAGM | VisA, ColonDB, BTAD, Kvasir, DAGM | MVTec | 92.65/96.58 | +0.57/+0.14 | 90.88/40.30/42.66/75.55 | +0.35/-0.83/-0.80/-7.28 |
-| 6 | Br35H | VisA, ColonDB, BTAD, Kvasir, DAGM, Br35H | MVTec | 92.83/96.56 | +0.18/-0.03 | 91.46/41.02/43.29/83.76 | +0.58/+0.72/+0.63/+8.21 |
+| Step | New source added | Source datasets seen so far              | Target probe |  iAUROC/iAP | Δ iAUROC/iAP vs. prev. step |      pAUROC/pAP/pF1/PRO | Δ pAUROC/pAP/pF1/PRO vs. prev. step |
+| ---: | ---------------- | ---------------------------------------- | ------------ | ----------: | --------------------------: | ----------------------: | ----------------------------------: |
+|    1 | VisA             | VisA                                     | MVTec        | 93.49/97.23 |                         N/A | 92.44/46.99/47.99/85.85 |                                 N/A |
+|    2 | ColonDB          | VisA, ColonDB                            | MVTec        | 92.70/96.67 |                 -0.79/-0.56 | 91.31/44.05/46.06/83.10 |             -1.12/-2.94/-1.93/-2.76 |
+|    3 | BTAD             | VisA, ColonDB, BTAD                      | MVTec        | 93.03/96.84 |                 +0.34/+0.17 | 91.66/45.27/46.63/83.53 |             +0.35/+1.22/+0.57/+0.43 |
+|    4 | Kvasir           | VisA, ColonDB, BTAD, Kvasir              | MVTec        | 92.07/96.44 |                 -0.96/-0.39 | 90.53/41.13/43.46/82.84 |             -1.13/-4.14/-3.17/-0.69 |
+|    5 | DAGM             | VisA, ColonDB, BTAD, Kvasir, DAGM        | MVTec        | 92.65/96.58 |                 +0.57/+0.14 | 90.88/40.30/42.66/75.55 |             +0.35/-0.83/-0.80/-7.28 |
+|    6 | Br35H            | VisA, ColonDB, BTAD, Kvasir, DAGM, Br35H | MVTec        | 92.83/96.56 |                 +0.18/-0.03 | 91.46/41.02/43.29/83.76 |             +0.58/+0.72/+0.63/+8.21 |
+
+Together, the probe matrix and two old-target trajectories answer the reviewer’s concern from two complementary views. The probe matrix reports the stage-wise performance after each newly added auxiliary source and the cumulative average change on old targets. The trajectory tables show the direct step-to-step change of a previously evaluated target after each new source is added. Both folds confirm that the model is updated only on auxiliary sources, while targets remain held out for zero-shot evaluation.
+
+
 
 
 
