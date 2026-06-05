@@ -134,32 +134,19 @@ These results directly instantiate the reviewer’s I/M/J/N example: after learn
 
 
 
-#### Stage-wise source-update protocol and zero-shot results
+#### Stage-wise old-target trajectory: VisA after each source update
 
-`New-target score` reports the zero-shot performance on the newly paired target after updating with the current source dataset.  
-`Avg. old-target Δ (vs. prev. step)` reports the average performance change on previously evaluated target probes after adding the current source, compared with the immediately preceding step. All values are reported in percentage points and averaged over applicable metrics.
+To explicitly answer how a previously evaluated target changes after adding a new source dataset, we report the stage-wise trajectory of VisA in Fold-1.  
+At Step 1, the model is updated with MVTec and evaluated on VisA. From Step 2 onward, VisA becomes an old target, and `Δ vs. prev. step` measures the change after adding the current new source compared with the immediately preceding source update.
 
-##### Fold-1: MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI
-
-| Step | New source dataset used for update | Source datasets seen so far | Held-out target probes evaluated | New target probe | New-target score | Avg. old-target Δ (vs. prev. step) |
-|---:|---|---|---|---|---:|---:|
-| 1 | MVTec | MVTec | VisA | VisA | 87.90/89.57, 96.13/26.96/33.60/88.11 | N/A |
-| 2 | ClinicDB | MVTec, ClinicDB | VisA, ColonDB | ColonDB | 89.67/63.82/60.43/82.61 | -0.79 |
-| 3 | MPDD | MVTec, ClinicDB, MPDD | VisA, ColonDB, BTAD | BTAD | 94.67/96.59, 92.77/38.53/44.36/74.82 | +0.23 |
-| 4 | ISIC | MVTec, ClinicDB, MPDD, ISIC | VisA, ColonDB, BTAD, Kvasir | Kvasir | 95.23/82.09/74.66/77.60 | -1.22 |
-| 5 | DTD | MVTec, ClinicDB, MPDD, ISIC, DTD | VisA, ColonDB, BTAD, Kvasir, DAGM | DAGM | 98.11/92.83, 97.18/53.95/54.76/93.61 | +0.17 |
-| 6 | BrainMRI | MVTec, ClinicDB, MPDD, ISIC, DTD, BrainMRI | VisA, ColonDB, BTAD, Kvasir, DAGM, Br35H | Br35H | 99.55/99.54 | -0.65 |
-
-##### Fold-2: VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
-
-| Step | New source dataset used for update | Source datasets seen so far | Held-out target probes evaluated | New target probe | New-target score | Avg. old-target Δ (vs. prev. step) |
-|---:|---|---|---|---|---:|---:|
-| 1 | VisA | VisA | MVTec | MVTec | 93.49/97.23, 92.44/46.99/47.99/85.85 | N/A |
-| 2 | ColonDB | VisA, ColonDB | MVTec, ClinicDB | ClinicDB | 96.19/79.38/71.83/88.52 | -1.68 |
-| 3 | BTAD | VisA, ColonDB, BTAD | MVTec, ClinicDB, MPDD | MPDD | 77.13/82.54, 96.11/24.62/26.61/83.88 | +0.03 |
-| 4 | Kvasir | VisA, ColonDB, BTAD, Kvasir | MVTec, ClinicDB, MPDD, ISIC | ISIC | 92.95/83.80/77.37/82.91 | +0.76 |
-| 5 | DAGM | VisA, ColonDB, BTAD, Kvasir, DAGM | MVTec, ClinicDB, MPDD, ISIC, DTD | DTD | 98.92/99.54, 98.18/61.59/58.99/79.02 | -2.63 |
-| 6 | Br35H | VisA, ColonDB, BTAD, Kvasir, DAGM, Br35H | MVTec, ClinicDB, MPDD, ISIC, DTD, BrainMRI | BrainMRI | 99.55/99.64 | -0.40 |
+| Step | New source added | Source datasets seen so far | Target probe | iAUROC/iAP | Δ iAUROC/iAP vs. prev. step | pAUROC/pAP/pF1/PRO | Δ pAUROC/pAP/pF1/PRO vs. prev. step |
+|---:|---|---|---|---:|---:|---:|---:|
+| 1 | MVTec | MVTec | VisA | 87.90/89.57 | N/A | 96.13/26.96/33.60/88.11 | N/A |
+| 2 | ClinicDB | MVTec, ClinicDB | VisA | 88.11/89.73 | +0.22/+0.16 | 95.97/25.34/31.88/86.52 | -0.16/-1.63/-1.72/-1.59 |
+| 3 | MPDD | MVTec, ClinicDB, MPDD | VisA | 88.14/89.84 | +0.02/+0.11 | 96.02/25.29/31.76/87.69 | +0.06/-0.05/-0.12/+1.16 |
+| 4 | ISIC | MVTec, ClinicDB, MPDD, ISIC | VisA | 88.25/89.94 | +0.12/+0.10 | 96.01/24.72/31.05/87.72 | -0.02/-0.57/-0.72/+0.03 |
+| 5 | DTD | MVTec, ClinicDB, MPDD, ISIC, DTD | VisA | 88.44/90.03 | +0.18/+0.09 | 95.94/24.68/30.81/87.40 | -0.07/-0.04/-0.24/-0.32 |
+| 6 | BrainMRI | MVTec, ClinicDB, MPDD, ISIC, DTD, BrainMRI | VisA | 87.64/89.03 | -0.80/-1.00 | 96.04/25.66/32.04/88.62 | +0.10/+0.97/+1.23/+1.22 |
 
 
 
