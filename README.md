@@ -409,11 +409,15 @@ We add replay-free EWC and LwF/KD baselines under the same auxiliary-domain stre
 
 ### Table GH-10c. Efficiency and extra training state of CL baselines
 
-| Method | Total Params (M) | Trainable Params (M) | Trainable (%) | Inference Speed (img/s) | Inference Time (ms/img) | Peak Inference Memory (GB) | Extra Training State          |
-| ------ | ---------------: | -------------------: | ------------: | ----------------------: | ----------------------: | -------------------------: | ----------------------------- |
-| EWC    |           431.11 |                 3.17 |         0.735 |                    8.29 |                  120.70 |                       4.33 | Fisher + parameter means      |
-| LwF/KD |           431.11 |                 3.17 |         0.735 |                    8.29 |                  120.70 |                       4.33 | Teacher model during training |
-| A2T    |           431.11 |                 3.17 |         0.735 |                    8.29 |                  120.70 |                       4.33 | None                          |
+| Method | Replay-free? | Inference Params (M) | Trainable Params (M) | Trainable (%) | Extra Training State | Extra State Scale | Extra Inference State |
+|---|---|---:|---:|---:|---|---|---|
+| EWC | Yes | 431.11 | 3.17 | 0.735 | Diagonal Fisher + previous parameter snapshot | ~2x trainable params | None |
+| LwF/KD | Yes | 431.11 | 3.17 | 0.735 | Previous-task teacher model | ~1x full model | None |
+| A2T/GPM | Yes | 431.11 | 3.17 | 0.735 | Compact GPM bases / protected subspaces | Layer-wise low-rank bases | None |
+
+
+
+
 
 **Key takeaway.**
 A2T achieves the best overall classification performance, with the highest iAUROC, iAP, and iF1. LwF/KD performs strongly on segmentation-oriented metrics and forgetting, but it requires an additional teacher model during training. A2T provides a strong balance between target-zero-shot transfer, continual stability, and training-state efficiency.
