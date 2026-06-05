@@ -263,7 +263,8 @@ These results show that the proposed continual auxiliary-to-target adaptation do
 
 
 ## Continual Adaptation Performance and Forgetting Analysis with EWC and LwF/KD
-## Performance Metrics
+
+### Performance Metrics
 
 | Method | Domain | iAUROC | iAP | iF1 | pAUROC | PRO | pAP | pF1 |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
@@ -277,7 +278,7 @@ These results show that the proposed continual auxiliary-to-target adaptation do
 | A2T | Medical Avg. | 99.55 | 99.59 | 97.99 | 90.57 | 75.81 | 70.20 | 66.25 |
 | **A2T** | **Overall Avg.** | **93.77** | **94.88** | **92.06** | **92.87** | **81.98** | **51.41** | **51.70** |
 
-## Forgetting and BWT Metrics
+### Forgetting and BWT Metrics
 
 | Method | F_iAUROC | BWT_iAUROC | F_iAP | BWT_iAP | F_pAUROC | BWT_pAUROC | F_PRO | BWT_PRO |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -285,13 +286,15 @@ These results show that the proposed continual auxiliary-to-target adaptation do
 | LwF/KD | **0.31** | 0.07 | 0.56 | 0.00 | **0.96** | -0.81 | **1.37** | **0.33** |
 | A2T | 0.42 | **0.13** | **0.47** | **0.27** | 2.13 | -1.82 | 3.87 | -1.72 |
 
-## Efficiency and Complexity Metrics
+### Efficiency and Complexity Metrics
 
 | Method | Total Params (M) | Trainable Params (M) | Trainable (%) | Inference Speed (img/s) | Inference Time (ms/img) | Peak Inference Memory (GB) | Extra Training State |
 |---|---:|---:|---:|---:|---:|---:|---|
 | EWC | 431.11 | 3.17 | 0.735 | 8.29 | 120.70 | 4.33 | Fisher + parameter means |
 | LwF/KD | 431.11 | 3.17 | 0.735 | 8.29 | 120.70 | 4.33 | Teacher model during training |
 | A2T | 431.11 | 3.17 | 0.735 | 8.29 | 120.70 | 4.33 | None |
+
+A2T achieves the best overall classification performance, with the highest iAUROC, iAP, and iF1 scores. LwF/KD performs better on segmentation-oriented metrics and shows the lowest forgetting on most metrics, suggesting stronger retention through teacher distillation. However, LwF/KD requires an additional teacher model during training, while EWC stores Fisher information and parameter means. In contrast, A2T uses the same inference architecture and does not introduce extra continual-learning state, offering a favorable trade-off between classification performance, forgetting control, and training-time complexity.
 
 ### Code release status
 
