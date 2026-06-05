@@ -30,16 +30,18 @@ We thank the reviewers for their constructive comments. Following their suggesti
 
 | GitHub ID | Reviewer concern | Section / Table | Main takeaway |
 |---|---|---|---|
-| GH-1 | LAP protocol and target access | [Table GH-1](#gh-1-lap-protocol-and-target-access) | LAP is auxiliary-supervised but target-zero-shot. |
-| GH-2 | Stage-wise performance after each source | [Tables GH-2a / GH-2b](#gh-2-stage-wise-zero-shot-probe-matrix) | Shows zero-shot probes after every auxiliary update. |
-| GH-3 | Old-target forgetting trajectory | [Tables GH-3a / GH-3b](#gh-3-old-target-forgetting-trajectory) | Shows old-target changes after adding new sources. |
-| GH-4 | Additional AP/F1 metrics | [Table GH-4](#gh-4-additional-apf1-metrics) | Reports iF1, pAP, and pF1. |
-| GH-5 | First-to-final retention | [Table GH-5](#gh-5-first-to-final-retention) | Compares long-term drops across methods. |
-| GH-6 | LAP vs. CAD | [Table GH-6](#gh-6-relation-to-continual-anomaly-detection) | Clarifies data-access and evaluation differences. |
-| GH-7 | Stream-order sensitivity | [Tables GH-7a / GH-7b](#gh-7-stream-order-sensitivity) | Compares Family-grouped, Alternating, and Distance-based orders. |
-| GH-8 | SCS basis construction and storage | [Table GH-8](#gh-8-scs-basis-construction-and-storage) | Reports SVD/QR basis update and replay-free storage. |
-| GH-9 | Efficiency and complexity | [Table GH-9](#gh-9-efficiency-and-complexity-analysis) | Reports parameters, speed, latency, and memory. |
-| GH-10 | Continual-learning baselines | [Tables GH-10a--GH-10c](#gh-10-continual-learning-baselines) | Reports EWC and LwF/KD under the same LAP stream. |
+| GH-1 | LAP protocol and target access | [Table GH-1](#gh-1-lap-protocol-and-target-access) | **Provided:** auxiliary-target split and target-zero-shot access constraints. |
+| GH-2 | Stage-wise performance after each source | [Tables GH-2a / GH-2b](#gh-2-stage-wise-zero-shot-probe-matrix) | **Provided:** zero-shot probes after every auxiliary update. |
+| GH-3 | Old-target forgetting trajectory | [Tables GH-3a / GH-3b](#gh-3-old-target-forgetting-trajectory) | **Provided:** old-target changes after adding new sources. |
+| GH-4 | Additional AP/F1 metrics | [Table GH-4](#gh-4-additional-apf1-metrics) | **Provided:** image max-F1, pixel AP, and pixel max-F1. |
+| GH-5 | First-to-final retention | [Table GH-5](#gh-5-first-to-final-retention) | **Provided:** long-term retention over 12 held-out target probes. |
+| GH-6 | LAP vs. CAD | [Table GH-6](#gh-6-relation-to-continual-anomaly-detection) | **Provided:** data-access and evaluation-goal comparison with CAD. |
+| GH-7 | Stream-order sensitivity | [Tables GH-7a / GH-7b](#gh-7-stream-order-sensitivity) | **Provided:** Family-grouped, Alternating, and Distance-based stream-order results. |
+| GH-8 | SCS basis construction and storage | [Table GH-8](#gh-8-scs-basis-construction-and-storage) | **Provided:** SVD/QR basis update, energy threshold, rank cap, and replay-free storage. |
+| GH-9 | Efficiency and complexity | [Table GH-9](#gh-9-efficiency-and-complexity-analysis) | **Provided:** parameters, trainable ratio, speed, latency, and peak memory. |
+| GH-10 | Continual-learning baselines | [Tables GH-10a--GH-10c](#gh-10-continual-learning-baselines) | **Provided:** EWC and LwF/KD results under the same LAP stream. |
+
+
 
 ---
 
