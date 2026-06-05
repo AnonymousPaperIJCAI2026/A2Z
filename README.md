@@ -224,11 +224,12 @@ Compared with AF-CLIP and MVFA-AD, A2T shows smaller long-term degradation on im
 
 To further evaluate the deployment cost of A2T, we report model size, trainable parameters, inference speed, latency, and peak GPU memory. All methods are evaluated under the same inference protocol and input resolution. For A2T, the CLIP backbone is kept frozen, and only lightweight prompt/adaptation modules are optimized during auxiliary-domain continual learning.
 
-| Method | Params ↓ | Trainable ↓ | Speed ↑ | Latency ↓ | Peak Mem ↓ |
-|---|---:|---:|---:|---:|---:|
-| **A2T full** | **431.11M** | **3.17M / 0.735%** | **8.29 img/s** | **120.70 ms/img** | **4.33 GB** |
-| AnomalyCLIP | 433.50M | 5.56M / 1.281% | 6.65 img/s | 150.29 ms/img | 4.87 GB |
-| AdaptCLIP zero-shot | 428.55M | 0.61M / 0.142% | 6.61 img/s | 151.34 ms/img | 4.86 GB |
+| Method | Aux train epochs | Params ↓ | Trainable ↓ | Speed ↑ | Latency ↓ | Peak Mem ↓ |
+|---|---:|---:|---:|---:|---:|---:|
+| **A2T full** | **2 / aux** | **431.11M** | **3.17M / 0.735%** | **8.29 img/s** | **120.70 ms/img** | **4.33 GB** |
+| AnomalyCLIP | 15 / aux | 433.50M | 5.56M / 1.281% | 6.65 img/s | 150.29 ms/img | 4.87 GB |
+| AdaptCLIP zero-shot | 15 / aux | 428.55M | 0.61M / 0.142% | 6.61 img/s | 151.34 ms/img | 4.86 GB |
+| AdaptCLIP few-shot/full (1-shot) | 15 / aux | 430.52M | 1.76M / 0.410% | 6.61 img/s | 151.26 ms/img | 5.01 GB |
 
 **Analysis.** A2T introduces only **3.17M** trainable parameters, accounting for **0.735%** of the full model parameters. Compared with AnomalyCLIP, A2T reduces the number of trainable parameters from **5.56M** to **3.17M**, while improving inference speed from **6.65 img/s** to **8.29 img/s** and reducing latency from **150.29 ms/img** to **120.70 ms/img**. A2T also requires lower peak GPU memory, using **4.33 GB** compared with **4.87 GB** for AnomalyCLIP and **4.86 GB** for AdaptCLIP.
 
