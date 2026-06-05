@@ -68,9 +68,13 @@ The auxiliary and target domains are disjoint. Target domains are used only for 
 | Medical      | BrainMRI         | Br35H         |
 | Medical      | Br35H            | BrainMRI      |
 
-### Stream-Ordering Protocol
+### Stream-Ordering Protocol under Two-Fold Auxiliary–Target Swap
 
-We evaluate three auxiliary-domain stream orders to test the robustness of continual zero-shot anomaly detection under different domain transition patterns. For each order, the auxiliary stream is used for continual training, while the paired target probes are used only for test-time evaluation.
+We evaluate three auxiliary-domain stream orders to test the robustness of continual zero-shot anomaly detection under different domain transition patterns. We adopt a two-fold auxiliary–target swap protocol. In each fold, the auxiliary stream is used for continual training, while the paired target probes are used only for test-time evaluation.
+
+Importantly, Fold-1 and Fold-2 are independent runs initialized from the same pretrained model. Fold-2 is not a continuation of Fold-1; it only swaps the auxiliary/target roles of the dataset pairs to reduce directional bias.
+
+#### Fold-1: Original auxiliary-to-target direction
 
 | Order type | Auxiliary-domain stream | Corresponding target probes |
 |---|---|---|
@@ -78,16 +82,15 @@ We evaluate three auxiliary-domain stream orders to test the robustness of conti
 | **Alternating** | MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI | VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H |
 | **Distance-based** | MPDD -> MVTec -> DTD -> ISIC -> ClinicDB -> BrainMRI | BTAD -> VisA -> DAGM -> Kvasir -> ColonDB -> Br35H |
 
-We additionally evaluate the complementary stream in which the original target probes are used as the auxiliary stream and the original auxiliary domains are used as probes:
+#### Fold-2: Role-swapped auxiliary-to-target direction
 
-| Order type | Complementary auxiliary stream | Corresponding target probes |
+| Order type | Auxiliary-domain stream | Corresponding target probes |
 |---|---|---|
 | **Family-grouped** | VisA -> BTAD -> DAGM -> ColonDB -> Kvasir -> Br35H | MVTec -> MPDD -> DTD -> ClinicDB -> ISIC -> BrainMRI |
 | **Alternating** | VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H | MVTec -> ClinicDB -> MPDD -> ISIC -> DTD -> BrainMRI |
 | **Distance-based** | VisA -> BTAD -> DAGM -> Br35H -> ColonDB -> Kvasir | MVTec -> MPDD -> DTD -> BrainMRI -> ClinicDB -> ISIC |
-```
 
-The model is evaluated on these target probes after each auxiliary-domain update, but the target data are never used for optimization.
+For every run, only the current auxiliary domain is used for model updating at each stream step. The corresponding target probes are strictly held out and are never used for training, prompt tuning, hyper-parameter selection, or model updating.
 
 ### Stage-wise zero-shot probe matrix
 
