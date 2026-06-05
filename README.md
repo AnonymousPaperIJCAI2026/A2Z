@@ -17,6 +17,10 @@ Zero-shot anomaly detection based on vision--language models is typically studie
 
 <div align="center"> <img src="images/fig2.png " width="100%"> </div>
 
+
+## 📝 ACMMM2026 Rebuttal Status 👈
+We thank the reviewers for their constructive comments. Following their suggestions, we have updated this repository to clarify the continual auxiliary-to-target zero-shot protocol and provide additional analyses for easier verification. Specifically, we clarify the data-access constraints of LAP, add stage-wise source-update evaluations and two-fold old-target trajectories, report additional image-/pixel-level F1 and AP metrics, and include analyses on stream order, long-term retention, baseline fairness, implementation details, and efficiency. These updates aim to make the A2T setting, evaluation protocol, and deployment cost clearer.
+
 ## Reviewer Navigation Map
 
 | GitHub ID | Reviewer concern | Section / Table | Main takeaway |
@@ -31,9 +35,6 @@ Zero-shot anomaly detection based on vision--language models is typically studie
 | GH-8 | SCS basis construction and storage | Table GH-8 | Reports SVD/QR basis update and replay-free storage. |
 | GH-9 | Efficiency and complexity | Table GH-9 | Reports parameters, speed, latency, and memory. |
 | GH-10 | Continual-learning baselines | Tables GH-10a / GH-10b | Reports EWC and LwF/KD under the same LAP stream. |
-
-## 📝 ACMMM2026 Rebuttal Status 👈
-We thank the reviewers for their constructive comments. Following their suggestions, we have updated this repository to clarify the continual auxiliary-to-target zero-shot protocol and provide additional analyses for easier verification. Specifically, we clarify the data-access constraints of LAP, add stage-wise source-update evaluations and two-fold old-target trajectories, report additional image-/pixel-level F1 and AP metrics, and include analyses on stream order, long-term retention, baseline fairness, implementation details, and efficiency. These updates aim to make the A2T setting, evaluation protocol, and deployment cost clearer.
 
 ### Current rebuttal-stage updates
 
