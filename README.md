@@ -173,7 +173,7 @@ VisA -> ColonDB -> BTAD -> Kvasir -> DAGM -> Br35H
 | 6    | Br35H        | BrainMRI            |      99.55 |     N/A |     N/A |     N/A |            +0.34 |         -6.14 |         -4.45 |         -1.86 |
 
 **Key takeaway.**
-These matrices directly show the model state after each auxiliary update: newly paired target performance is reported together with the average change on previously evaluated targets.
+Table GH-2a shows that directly adding auxiliary sources can cause forgetting in a strong ZSIAD baseline, especially for pixel-level localization. Tables GH-2b and GH-2c further show the A2T model state after each auxiliary update: newly paired target performance is reported together with the average change on previously evaluated targets.
 
 ---
 
