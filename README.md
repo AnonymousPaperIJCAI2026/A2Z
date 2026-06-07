@@ -114,7 +114,7 @@ LAP is auxiliary-supervised but target-zero-shot. Auxiliary labels/masks are use
 ## GH-2. Stage-wise Zero-shot Probe Matrix
 
 **Reviewer concern addressed:**  
-What is the performance after using source dataset A, and how does it change after adding source dataset B?
+What is the performance after using source dataset I, and how does it change after adding source dataset M?
 
 At each step, the model is trained only on the newly arriving auxiliary source. All listed target domains are held out and used only for evaluation. In the probe matrix, `Avg. old-target Δ` reports the average performance change on previously evaluated target domains, compared with their performance when they first appeared.
 
