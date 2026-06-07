@@ -32,7 +32,7 @@ We thank the reviewers for their constructive comments. Following their suggesti
 | GitHub ID | Reviewer concern | Section / Table | Main takeaway |
 |---|---|---|---|
 | GH-1 | LAP protocol and target access | [Table GH-1](#gh-1-lap-protocol-and-target-access) | **Provided:** auxiliary-target split and target-zero-shot access constraints. |
-| GH-2 | Stage-wise performance after each source | [Tables GH-2a / GH-2b](#gh-2-stage-wise-zero-shot-probe-matrix) | **Provided:** zero-shot probes after every auxiliary update. |
+| GH-2 | Stage-wise probes and forgetting diagnostic | [Tables GH-2a / GH-2b / GH-2c](#gh-2-stage-wise-zero-shot-probes-and-forgetting-diagnostic) | **Provided:** AF-CLIP I vs. I+M diagnostic plus A2T zero-shot probes after every auxiliary update. |
 | GH-3 | Old-target forgetting trajectory | [Tables GH-3a / GH-3b](#gh-3-old-target-forgetting-trajectory) | **Provided:** old-target changes after adding new sources. |
 | GH-4 | Additional AP/F1 metrics | [Table GH-4](#gh-4-additional-apf1-metrics) | **Provided:** image max-F1, pixel AP, and pixel max-F1. |
 | GH-5 | First-to-final retention | [Table GH-5](#gh-5-first-to-final-retention) | **Provided:** long-term retention over 12 held-out target probes. |
@@ -111,16 +111,19 @@ LAP is auxiliary-supervised but target-zero-shot. Auxiliary labels/masks are use
 
 <a id="gh-2-stage-wise-zero-shot-probe-matrix"></a>
 
-## GH-2. Stage-wise Zero-shot Probe Matrix
+## GH-2. Stage-wise Zero-shot Probes and Forgetting Diagnostic
 
-**Reviewer concern addressed:**  
-What is the performance after using source dataset I, and how does it change after adding source dataset M?
+**Reviewer concern addressed:**
+What is the performance after using source set (I), and how does it change after adding source set (M)? Is there evidence of forgetting in current ZSIAD baselines such as AF-CLIP?
 
-At each step, the model is trained only on the newly arriving auxiliary source. All listed target domains are held out and used only for evaluation. In the probe matrix, `Avg. old-target Δ` reports the average performance change on previously evaluated target domains, compared with their performance when they first appeared.
+We provide two complementary analyses. Table GH-2a follows the reviewer-suggested (I) vs. (I+M) protocol to verify whether directly expanding auxiliary training sources causes forgetting in current ZSIAD methods. Tables GH-2b and GH-2c report A2T stage-wise zero-shot probes: after each auxiliary update, we evaluate the newly paired held-out target and the average change on previously evaluated targets.
+
+For Tables GH-2b and GH-2c, at each step, the model is trained only on the newly arriving auxiliary source. All target domains are strictly held out and used only for evaluation.
+
 
 `N/A` indicates that the corresponding metric is not applicable, e.g., image-level metrics for medical segmentation datasets with only anomalous test images, or old-target change at the first step.
 
-### Table GH-2a. Baseline for Verifying Catastrophic Forgetting in ZSIAD
+### Table GH-2a. AF-CLIP baseline for verifying catastrophic forgetting under the \(I\) vs. \(I+M\) protocol
 | Metric | Test set(J/N) | I: MVTec only | I+M: MVTec+MPDD+DTD+ClinicDB+ISIC+BrainMRI | Δ |
 |---|---|---:|---:|---:|
 | Image AUROC / AP | VisA | 88.5 / 90.0 | 87.4 / 89.0 | -1.1 / -1.0 |
