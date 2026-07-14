@@ -9,7 +9,28 @@
 <div align="justify">
 
 ## ⭐ Abstract 
-Zero-shot anomaly detection based on vision--language models is typically studied under static settings, whereas real deployments involve sequential domain shifts and continual updates. This mismatch leads to degraded transferability and unstable anomaly localization under streaming adaptation. To address this issue, we propose A2T, a continual auxiliary-to-target zero-shot anomaly detection framework under the Lifelong Anomaly Perception (LAP) setting. The key idea is to decouple semantic transfer and structural stability during continual updates. Specifically, we introduce Stream-aware Continual Prompting (SCP) to preserve transferable anomaly semantics via anchor-conditioned prompt learning, and Structure-aware Continual Stabilization (SCS) to maintain boundary-aware local consistency through patch-consistent regularization and orthogonal-constrained parameter updates. These components are unified under a continual optimization objective that jointly balances semantic alignment, pixel-level supervision, and structural consistency. Extensive experiments on 12 industrial and medical benchmarks demonstrate that A2T consistently outperforms both static zero-shot methods and their streaming extensions, achieving state-of-the-art performance in image-level anomaly detection and pixel-level segmentation, while improving continual stability and boundary quality under domain streams.
+Zero-shot anomaly detection transfers anomaly knowledge from auxiliary
+domains to unseen target domains without requiring target-domain
+training data. Existing methods assume static auxiliary domains for
+one-shot adaptation, whereas real-world auxiliary domains evolve
+continuously. Continual adaptation to such evolving domains progressively
+weakens transferable anomaly semantics and fine-grained anomaly
+localization. To address this problem, we propose \textsc{CHAIN}, a continual
+zero-shot anomaly detection framework under evolving auxiliary domains.
+The framework consists of two complementary components:
+\emph{Transferable Semantic Preservation (TSP)}, which preserves
+transferable anomaly semantics through anchor-conditioned prompt
+learning, and \emph{Fine-grained Structural Consistency (FSC)}, which
+maintains local anomaly structures and spatial boundaries throughout
+continual adaptation. We further derive an expected target-risk bound that bridges
+auxiliary-domain optimization and unseen target-domain generalization,
+providing theoretical justification for the proposed optimization
+objective. Extensive
+experiments on 12 industrial and medical benchmarks demonstrate that
+\textsc{CHAIN} consistently improves image-level detection, pixel-level
+localization, and continual stability, achieving average industrial
+AUROC/AP of $91.8\%/93.3\%$ and pixel-level AUROC/PRO of
+$94.4\%/86.1\%$.
 
 </div>
 
