@@ -1,6 +1,6 @@
 <div align="left"> 
 <h1> 📌 Lifelong Anomaly Perception: A2T </h1>
-<h3>Lifelong Anomaly Perception: Continual Auxiliary to Target Zero-Shot Anomaly Detection</h3>
+<h3>{CHAIN}: Continual Zero-shot Anomaly Detection under Evolving Auxiliary Domains Detection</h3>
 </div>
 
 
