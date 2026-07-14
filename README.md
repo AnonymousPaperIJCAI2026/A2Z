@@ -1,5 +1,5 @@
 <div align="left"> 
-<h1> 📌 CHAIN </h1>
+<h1> 📌 CHAIN ⛓ </h1>
 <h3>CHAIN: Continual Zero-shot Anomaly Detection under Evolving Auxiliary Domains Detection</h3>
 </div>
 
